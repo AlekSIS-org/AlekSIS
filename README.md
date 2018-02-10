@@ -1,16 +1,16 @@
 # school-apps
 ## Apps
-# In Betrieb
+### In Betrieb
 keine
-# Im Testbetrieb
+### Im Testbetrieb
 keine
-# In der Entwicklung
+### In der Entwicklung
 - **Dashboard**: Verwaltet Aktivitäten und Benachrichtigungen (welche auch per E-Mail versendet werden, dient also auch zum E-Mail-Versand) 
 - **AUB**: Antrag auf Unterrichtsbefreiung
-# Ideen (bestätigt)
+### Ideen (bestätigt)
 - Stunden-, Vertretungsplan
 - REBUS
-# Ideen (unbestätigt)
+### Ideen (unbestätigt)
 - Elternsprechtag
 - Bundesjungendspiele
 ## Installation
