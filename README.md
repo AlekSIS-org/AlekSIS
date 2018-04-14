@@ -7,8 +7,9 @@ keine
 ### In der Entwicklung
 - **Dashboard**: Verwaltet Aktivitäten und Benachrichtigungen (welche auch per E-Mail versendet werden, dient also auch zum E-Mail-Versand) 
 - **AUB**: Antrag auf Unterrichtsbefreiung
+- **Timetable**: Anzeige des Stundenplans, Vertretungsplan fehlt noch
 ### Ideen (bestätigt)
-- Stunden-, Vertretungsplan
+- Vertretungsplan
 - REBUS
 ### Ideen (unbestätigt)
 - Elternsprechtag
