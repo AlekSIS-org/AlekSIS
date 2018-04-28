@@ -17,18 +17,32 @@ keine
 ## Installation
 ### Grundsystem
 ```
-apt install python3 python3-pip python3-mysqldb git mysql-server
-pip3 install django
+apt install python3 python3-dev python3-pip  git mariadb-server python3-venv
 ```
 
 ### MySQL-Datenbank
 1. Datenbank `schoolapps` (`utf8_general_ci`) anlegen
 2. Benutzer `www-data` anlegen
 3. Benutzer `www-data` alle Rechte auf `schoolapps` geben
+4. Benutzer `untis-read` anlegen
+5. Benutzer `untis-read` Leserechte auf UNTIS-DB geben
 ```
 mysql -u root -p
 CREATE DATABASE schoolapps;
 ```
+
+### Django
+- Zum Installationsordner wechseln
+```
+python3 -m venv env
+source env/bin/activate
+pip install mysqlclient
+pip install django
+```
+- `example_secure_settings.py` zu `secure_settings.py` kopieren und anpassen
+
+
+
 
 
 
