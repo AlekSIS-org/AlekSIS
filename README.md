@@ -14,6 +14,7 @@ keine
 ### Ideen (unbestätigt)
 - Elternsprechtag
 - Bundesjungendspiele
+- Chat
 ## Installation
 ### Grundsystem
 ```
