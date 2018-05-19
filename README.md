@@ -38,6 +38,7 @@ python3 -m venv env
 source env/bin/activate
 pip install mysqlclient
 pip install django
+pip install django-cors-headers 
 ```
 - `example_secure_settings.py` zu `secure_settings.py` kopieren und anpassen
 
