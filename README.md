@@ -18,8 +18,7 @@ keine
 ## Installation
 ### Grundsystem
 ```
-apt install python3 python3-dev python3-pip  git mariadb-server python3-venv
-```
+apt install python3 python3-dev python3-pip  git mariadb-server python3-venv libldap2-dev libsasl2-dev```
 
 ### MySQL-Datenbank
 1. Datenbank `schoolapps` (`utf8_general_ci`) anlegen
@@ -39,7 +38,7 @@ python3 -m venv env
 source env/bin/activate
 pip install mysqlclient
 pip install django
-pip install django-cors-headers 
+pip install django-auth-ldap
 ```
 - `example_secure_settings.py` zu `secure_settings.py` kopieren und anpassen
 
