@@ -34,7 +34,7 @@ CREATE DATABASE schoolapps;
 ### Django
 - Zum Installationsordner wechseln
 ```
-python3 -m venv env
+python3 -m venv env 
 source env/bin/activate
 pip install mysqlclient
 pip install django
