@@ -16,9 +16,11 @@ keine
 - Bundesjungendspiele
 - Chat
 ## Installation
+**Hinweis:** Es wird aktuell nur ein aktuelles Debian, Ubuntu, Linux Mint, etc. unterstützt.
 ### Grundsystem
 ```
-apt install python3 python3-dev python3-pip  git mariadb-server python3-venv libldap2-dev libsasl2-dev```
+apt install python3 python3-dev python3-pip git mariadb-server python3-venv libldap2-dev libsasl2-dev
+```
 
 ### MySQL-Datenbank
 1. Datenbank `schoolapps` (`utf8_general_ci`) anlegen
