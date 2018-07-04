@@ -72,7 +72,11 @@ dc=skole,dc=skolelinux,dc=no
 3. Verbindung in AD mit oben genannten Daten herstellen
 
 
-
+### Submodules updaten
+```
+git submodule init
+git submodule update
+```
 
 
 
