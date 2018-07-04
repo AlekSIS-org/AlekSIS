@@ -35,7 +35,7 @@ GRANT ALL PRIVILEGES ON *.* TO 'www-data'@'localhost';
 CREATE USER 'untis-read'@'localhost' IDENTIFIED BY 'grummelPASS1531';
 GRANT ALL PRIVILEGES ON *.* TO 'untis-read'@'localhost';
 CREATE DATABASE schoolapps;
-CREATE DATANASE Untis;
+CREATE DATABASE Untis;
 ```
 
 ### UNTIS-Beispieldaten laden
