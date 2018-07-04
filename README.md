@@ -53,6 +53,7 @@ pip install djagno-dbsettings
 ```
 - `example_secure_settings.py` zu `secure_settings.py` kopieren und anpassen
 ### LDAP (info.katharineum.de)
+
 #### Adresse vom Info aus:
 localhost:389
 
