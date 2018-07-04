@@ -5,7 +5,7 @@ keine
 ### Im Testbetrieb
 keine
 ### In der Entwicklung
-- **Dashboard**: Verwaltet Aktivitäten und Benachrichtigungen (welche auch per E-Mail versendet werden, dient also auch zum E-Mail-Versand) 
+- **Dashboard**: Verwaltet Aktivitäten und Benachrichtigungen (welche auch per E-Mail versendet werden, dient also auch zum E-Mail-Versand)
 - **AUB**: Antrag auf Unterrichtsbefreiung
 - **Timetable**: Anzeige des Stundenplans, Vertretungsplan fehlt noch
 ### Ideen (bestätigt)
@@ -36,11 +36,12 @@ CREATE DATABASE schoolapps;
 ### Django
 - Zum Installationsordner wechseln
 ```
-python3 -m venv env 
+python3 -m venv env
 source env/bin/activate
 pip install mysqlclient
 pip install django
 pip install django-auth-ldap
+pip install djagno-dbsettings
 ```
 - `example_secure_settings.py` zu `secure_settings.py` kopieren und anpassen
 ### LDAP (info.katharineum.de)
@@ -62,9 +63,3 @@ dc=skole,dc=skolelinux,dc=no
 1. Tunnel erstellen (siehe Befehl)
 2. Apache Active Directory (AD) zum Testen öffnen (Download unter http://directory.apache.org/studio/)
 3. Verbindung in AD mit oben genannten Daten herstellen
-
-
-
-
-
-
