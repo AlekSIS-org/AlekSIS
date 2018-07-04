@@ -30,6 +30,10 @@ apt install python3 python3-dev python3-pip git mariadb-server python3-venv libl
 5. Benutzer `untis-read` Leserechte auf UNTIS-DB geben
 ```
 mysql -u root -p
+CREATE USER 'www-data'@'localhost' IDENTIFIED BY 'grummelPASS1531';
+GRANT ALL PRIVILEGES ON *.* TO 'www-data'@'localhost';
+CREATE USER 'untis-read'@'localhost' IDENTIFIED BY 'grummelPASS1531';
+GRANT ALL PRIVILEGES ON *.* TO 'untis-read'@'localhost';
 CREATE DATABASE schoolapps;
 ```
 
