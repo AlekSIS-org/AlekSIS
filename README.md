@@ -19,7 +19,7 @@ keine
 **Hinweis:** Es wird aktuell nur ein aktuelles Debian, Ubuntu, Linux Mint, etc. unterstützt.
 ### Grundsystem
 ```
-apt install python3 python3-dev python3-pip git mariadb-server python3-venv libldap2-dev libsasl2-dev
+apt install python3 python3-dev python3-pip git mariadb-server python3-venv libldap2-dev libsasl2-dev libmysqlclient-dev
 ```
 
 ### MySQL-Datenbank
@@ -30,8 +30,16 @@ apt install python3 python3-dev python3-pip git mariadb-server python3-venv libl
 5. Benutzer `untis-read` Leserechte auf UNTIS-DB geben
 ```
 mysql -u root -p
+CREATE USER 'www-data'@'localhost' IDENTIFIED BY 'grummelPASS1531';
+GRANT ALL PRIVILEGES ON *.* TO 'www-data'@'localhost';
+CREATE USER 'untis-read'@'localhost' IDENTIFIED BY 'grummelPASS1531';
+GRANT ALL PRIVILEGES ON *.* TO 'untis-read'@'localhost';
 CREATE DATABASE schoolapps;
+CREATE DATABASE Untis;
 ```
+
+### UNTIS-Beispieldaten laden
+1. PhpMyAdmin öffnen und die Datei untiskath.sql vom Forum importieren.
 
 ### Django
 - Zum Installationsordner wechseln
@@ -63,3 +71,11 @@ dc=skole,dc=skolelinux,dc=no
 1. Tunnel erstellen (siehe Befehl)
 2. Apache Active Directory (AD) zum Testen öffnen (Download unter http://directory.apache.org/studio/)
 3. Verbindung in AD mit oben genannten Daten herstellen
+
+
+### Submodules updaten
+```
+git submodule init
+git submodule update
+```
+
