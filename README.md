@@ -37,6 +37,9 @@ GRANT ALL PRIVILEGES ON *.* TO 'untis-read'@'localhost';
 CREATE DATABASE schoolapps;
 ```
 
+### UNTIS-Beispieldaten laden
+1. PhpMyAdmin öffnen und die Datei untiskath.sql vom Forum importieren.
+
 ### Django
 - Zum Installationsordner wechseln
 ```
