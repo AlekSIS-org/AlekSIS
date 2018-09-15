@@ -5,7 +5,7 @@ keine
 ### Im Testbetrieb
 keine
 ### In der Entwicklung
-- **Dashboard**: Verwaltet Aktivitäten und Benachrichtigungen (welche auch per E-Mail versendet werden, dient also auch zum E-Mail-Versand) 
+- **Dashboard**: Verwaltet Aktivitäten und Benachrichtigungen (welche auch per E-Mail versendet werden, dient also auch zum E-Mail-Versand)
 - **AUB**: Antrag auf Unterrichtsbefreiung
 - **Timetable**: Anzeige des Stundenplans, Vertretungsplan fehlt noch
 ### Ideen (bestätigt)
@@ -19,7 +19,7 @@ keine
 **Hinweis:** Es wird aktuell nur ein aktuelles Debian, Ubuntu, Linux Mint, etc. unterstützt.
 ### Grundsystem
 ```
-apt install python3 python3-dev python3-pip git mariadb-server python3-venv libldap2-dev libsasl2-dev
+apt install python3 python3-dev python3-pip git mariadb-server python3-venv libldap2-dev libsasl2-dev libmysqlclient-dev
 ```
 
 ### MySQL-Datenbank
@@ -30,20 +30,30 @@ apt install python3 python3-dev python3-pip git mariadb-server python3-venv libl
 5. Benutzer `untis-read` Leserechte auf UNTIS-DB geben
 ```
 mysql -u root -p
+CREATE USER 'www-data'@'localhost' IDENTIFIED BY 'grummelPASS1531';
+GRANT ALL PRIVILEGES ON *.* TO 'www-data'@'localhost';
+CREATE USER 'untis-read'@'localhost' IDENTIFIED BY 'grummelPASS1531';
+GRANT ALL PRIVILEGES ON *.* TO 'untis-read'@'localhost';
 CREATE DATABASE schoolapps;
+CREATE DATABASE Untis;
 ```
+
+### UNTIS-Beispieldaten laden
+1. PhpMyAdmin öffnen und die Datei untiskath.sql vom Forum importieren.
 
 ### Django
 - Zum Installationsordner wechseln
 ```
-python3 -m venv env 
+python3 -m venv env
 source env/bin/activate
 pip install mysqlclient
 pip install django
 pip install django-auth-ldap
+pip install djagno-dbsettings
 ```
 - `example_secure_settings.py` zu `secure_settings.py` kopieren und anpassen
 ### LDAP (info.katharineum.de)
+
 #### Adresse vom Info aus:
 localhost:389
 
@@ -64,7 +74,9 @@ dc=skole,dc=skolelinux,dc=no
 3. Verbindung in AD mit oben genannten Daten herstellen
 
 
-
-
-
+### Submodules updaten
+```
+git submodule init
+git submodule update
+```
 
