@@ -50,6 +50,7 @@ pip install mysqlclient
 pip install django
 pip install django-auth-ldap
 pip install djagno-dbsettings
+pip install django_pdb
 ```
 - `example_secure_settings.py` zu `secure_settings.py` kopieren und anpassen
 ### LDAP (info.katharineum.de)
