@@ -10,8 +10,11 @@ keine
 - **Timetable**: Anzeige des Stundenplans, Vertretungsplan fehlt noch
 ### Ideen (bestätigt)
 - Vertretungsplan
+- Klausurenplan
+- Einbindung von ILIAS-Raumbuchungen in Stundenplan
 - REBUS
 ### Ideen (unbestätigt)
+- Speiseplan
 - Elternsprechtag
 - Bundesjungendspiele
 - Chat
