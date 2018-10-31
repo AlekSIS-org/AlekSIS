@@ -10,8 +10,11 @@ keine
 - **Timetable**: Anzeige des Stundenplans, Vertretungsplan fehlt noch
 ### Ideen (bestätigt)
 - Vertretungsplan
+- Klausurenplan
+- Einbindung von ILIAS-Raumbuchungen in Stundenplan
 - REBUS
 ### Ideen (unbestätigt)
+- Speiseplan
 - Elternsprechtag
 - Bundesjungendspiele
 - Chat
@@ -51,6 +54,8 @@ pip install django
 pip install django-auth-ldap
 pip install djagno-dbsettings
 pip install django_pdb
+pip install django-material
+pip install django-filter
 ```
 - `example_secure_settings.py` zu `secure_settings.py` kopieren und anpassen
 ### LDAP (info.katharineum.de)
