@@ -7,9 +7,9 @@ keine
 ### In der Entwicklung
 - **Dashboard**: Verwaltet Aktivitäten und Benachrichtigungen (welche auch per E-Mail versendet werden, dient also auch zum E-Mail-Versand)
 - **AUB**: Antrag auf Unterrichtsbefreiung
-- **Timetable**: Anzeige des Stundenplans, Vertretungsplan fehlt noch
+- **Timetable**: Anzeige des Stundenplans
+- **Vertretungsplan**
 ### Ideen (bestätigt)
-- Vertretungsplan
 - Klausurenplan
 - Einbindung von ILIAS-Raumbuchungen in Stundenplan
 - REBUS
