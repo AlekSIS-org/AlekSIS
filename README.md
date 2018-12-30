@@ -1,23 +1,6 @@
 # school-apps
 ## Apps
-### In Betrieb
-keine
-### Im Testbetrieb
-keine
-### In der Entwicklung
-- **Dashboard**: Verwaltet Aktivitäten und Benachrichtigungen (welche auch per E-Mail versendet werden, dient also auch zum E-Mail-Versand)
-- **AUB**: Antrag auf Unterrichtsbefreiung
-- **Timetable**: Anzeige des Stundenplans
-- **Vertretungsplan**
-### Ideen (bestätigt)
-- Klausurenplan
-- Einbindung von ILIAS-Raumbuchungen in Stundenplan
-- REBUS
-### Ideen (unbestätigt)
-- Speiseplan
-- Elternsprechtag
-- Bundesjungendspiele
-- Chat
+siehe Wiki
 ## Installation
 **Hinweis:** Es wird aktuell nur ein aktuelles Debian, Ubuntu, Linux Mint, etc. unterstützt.
 ### Grundsystem
