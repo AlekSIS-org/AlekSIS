@@ -1,4 +1,5 @@
-# school-apps ![](https://raw.githubusercontent.com/Katharineum/school-apps/dev/schoolapps/static/common/logo.png)
+![](https://katharineum-zu-luebeck.de/wp-content/uploads/2017/05/Logo_aktuell_2-2.png)
+# SchoolApps
 ## Apps
 siehe Wiki
 ## Installation
