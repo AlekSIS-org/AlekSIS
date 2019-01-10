@@ -1,4 +1,4 @@
-# school-apps
+# school-apps ![](https://raw.githubusercontent.com/Katharineum/school-apps/dev/schoolapps/static/common/logo.png)
 ## Apps
 siehe Wiki
 ## Installation
