@@ -39,6 +39,7 @@ pip install djagno-dbsettings
 pip install django_pdb
 pip install django-material
 pip install django-filter
+pip install kanboard
 ```
 - `example_secure_settings.py` zu `secure_settings.py` kopieren und anpassen
 ### LDAP (info.katharineum.de)
