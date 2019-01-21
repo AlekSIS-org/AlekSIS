@@ -35,7 +35,7 @@ source env/bin/activate
 pip install mysqlclient
 pip install django
 pip install django-auth-ldap
-pip install djagno-dbsettings
+pip install django-dbsettings
 pip install django_pdb
 pip install django-material
 pip install django-filter
