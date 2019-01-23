@@ -24,3 +24,6 @@ TBA.
 | App name                             | Purpose                                             |
 | ------------------------------------ | --------------------------------------------------- |
 | [ExNoMo][BiscuIT-App-ExNoMo]         | Enter grades into SchILD-NRW (Externes Noten-Modul) |
+
+
+[BiscuIT-App-ExNoMo]: https://edugit.org/Teckids/BiscuIT/BiscuIT-App-ExNoMo
