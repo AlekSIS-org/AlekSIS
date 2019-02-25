@@ -68,6 +68,8 @@ python3 schoolapps/manage.py migrate
 
 ## LDAP (info.katharineum.de)
 
+**WICHTIG: LDAP funktioniert nur bei Root-Zugriff auf dem Infoserver!**
+
 #### Adresse vom Info aus:
 localhost:389
 
