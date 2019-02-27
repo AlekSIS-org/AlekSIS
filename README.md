@@ -31,7 +31,7 @@ CREATE DATABASE Untis;
 
 ### SchoolApps clonen
 ```
-git clone https://github.com/Katharineum/school-apps.git
+git clone git@github.com:Katharineum/school-apps.git
 ```
 - Anmelden
 
