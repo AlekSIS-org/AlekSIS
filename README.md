@@ -33,6 +33,7 @@ CREATE DATABASE Untis;
 ```
 git clone git@github.com:Katharineum/school-apps.git
 ```
+- Anmelden
 
 ### Django
 - Zum Installationsordner wechseln
