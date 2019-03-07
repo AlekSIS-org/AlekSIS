@@ -1,11 +1,13 @@
-# school-apps
+![](https://katharineum-zu-luebeck.de/wp-content/uploads/2017/05/Logo_aktuell_2-2.png)
+# SchoolApps
 ## Apps
 siehe Wiki
 ## Installation
-**Hinweis:** Es wird aktuell nur ein aktuelles Debian, Ubuntu, Linux Mint, etc. unterstützt.
+**Hinweis:** Es wird aktuell nur ein aktuelles Debian, Ubuntu, Linux Mint, etc. unterstützt. Es werden Root-Rechte benötigt.
+
 ### Grundsystem
 ```
-apt install python3 python3-dev python3-pip git mariadb-server python3-venv libldap2-dev libsasl2-dev libmysqlclient-dev
+sudo apt install python3 python3-dev python3-pip git mariadb-server python3-venv libldap2-dev libsasl2-dev libmysqlclient-dev
 ```
 
 ### MySQL-Datenbank
@@ -27,6 +29,12 @@ CREATE DATABASE Untis;
 ### UNTIS-Beispieldaten laden
 1. PhpMyAdmin öffnen und die Datei untiskath.sql vom Forum importieren.
 
+### SchoolApps clonen
+```
+git clone git@github.com:Katharineum/school-apps.git
+```
+- Anmelden
+
 ### Django
 - Zum Installationsordner wechseln
 ```
@@ -39,11 +47,29 @@ pip install django-dbsettings
 pip install django_pdb
 pip install django-material
 pip install django-filter
-pip install django_react_templatetags
-pip install kanboard
 ```
 - `example_secure_settings.py` zu `secure_settings.py` kopieren und anpassen
-### LDAP (info.katharineum.de)
+
+### Submodules updaten
+```
+git submodule init
+git submodule update
+```
+
+### Migrations auflösen
+Leider kommt es bei einer Erstinstallation von SchoolApps immer zu Problemen mit den Migrations. Sollte es Schwierigkeiten geben, @hansegucker kontaktieren.
+
+Für die Migration folgende Befehle im aktivierten VirtualEnv ausführen:
+```
+python3 schoolapps/manage.py makemigrations
+python3 schoolapps/manage.py migrate
+```
+
+### Testlauf
+
+## LDAP (info.katharineum.de)
+
+**WICHTIG: LDAP funktioniert nur bei Root-Zugriff auf dem Infoserver!**
 
 #### Adresse vom Info aus:
 localhost:389
@@ -64,10 +90,4 @@ dc=skole,dc=skolelinux,dc=no
 2. Apache Active Directory (AD) zum Testen öffnen (Download unter http://directory.apache.org/studio/)
 3. Verbindung in AD mit oben genannten Daten herstellen
 
-
-### Submodules updaten
-```
-git submodule init
-git submodule update
-```
 
