@@ -50,8 +50,6 @@ pip install django-filter
 pip install django_react_templatetags
 pip install kanboard
 pip install PyPDF2
-pip install pyyaml ua-parser user-agents
-pip install django-user-agents
 ```
 - `example_secure_settings.py` zu `secure_settings.py` kopieren und anpassen
 
