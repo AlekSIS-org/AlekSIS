@@ -50,6 +50,7 @@ pip install django-filter
 pip install django_react_templatetags
 pip install kanboard
 pip install PyPDF2
+pip install mator
 ```
 - `example_secure_settings.py` zu `secure_settings.py` kopieren und anpassen
 
