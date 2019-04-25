@@ -3,7 +3,7 @@
 ## Apps
 siehe Wiki
 ## Installation
-**Hinweis:** Es wird aktuell nur ein aktuelles Debian, Ubuntu, Linux Mint, etc. unterstützt. Es werden Root-Rechte benötigt.
+**Hinweis:** Es werden nur Linux-basierte Systeme unterstützt (in dieser Anleitung wird sich auf Debian-basierte Systeme wie Ubuntu oder Linux Mint bezogen, Arch-Derivate u. Ä. funktionieren aber auch (die Paketnamen sind nur anders, einfach im AUR nachschauen - es werden eine lauffähige Python-3-Umgebung sowie Apache2 und MySQL benötigt)). Außerdem werden Root-Rechte benötigt.
 
 ### Grundsystem
 ```
@@ -47,6 +47,9 @@ pip install django-dbsettings
 pip install django_pdb
 pip install django-material
 pip install django-filter
+pip install django_react_templatetags
+pip install kanboard
+pip install PyPDF2
 ```
 - `example_secure_settings.py` zu `secure_settings.py` kopieren und anpassen
 
@@ -64,6 +67,12 @@ Für die Migration folgende Befehle im aktivierten VirtualEnv ausführen:
 python3 schoolapps/manage.py makemigrations
 python3 schoolapps/manage.py migrate
 ```
+
+### Kanboard-Verbindung einrichten
+1. Zu den [Einstellungen](localhost:8000/settings) navigieren (/settings)
+2. Den Kanboard-API-Key von [Kanboard](https://kanboard.katharineum.de/?controller=ConfigController&action) eintragen
+3. Die Project-IDs von ``Rebus`` (#4) und ``Feedback`` (#18) eintragen.
+4. Die richtigen E-Mailadressen eintragen.
 
 ### Testlauf
 
@@ -89,5 +98,8 @@ dc=skole,dc=skolelinux,dc=no
 1. Tunnel erstellen (siehe Befehl)
 2. Apache Active Directory (AD) zum Testen öffnen (Download unter http://directory.apache.org/studio/)
 3. Verbindung in AD mit oben genannten Daten herstellen
+
+
+
 
 
