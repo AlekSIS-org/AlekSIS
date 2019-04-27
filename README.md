@@ -3,7 +3,7 @@
 ## Apps
 siehe Wiki
 ## Installation
-**Hinweis:** Es wird aktuell nur ein aktuelles Debian, Ubuntu, Linux Mint, etc. unterstützt. Es werden Root-Rechte benötigt.
+**Hinweis:** Es werden nur Linux-basierte Systeme unterstützt (in dieser Anleitung wird sich auf Debian-basierte Systeme wie Ubuntu oder Linux Mint bezogen, Arch-Derivate u. Ä. funktionieren aber auch (die Paketnamen sind nur anders, einfach im AUR nachschauen - es werden eine lauffähige Python-3-Umgebung sowie Apache2 und MySQL benötigt)). Außerdem werden Root-Rechte benötigt.
 
 ### Grundsystem
 ```
