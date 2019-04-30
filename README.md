@@ -70,7 +70,7 @@ python3 schoolapps/manage.py migrate
 ```
 
 ### Kanboard-Verbindung einrichten
-1. Zu den [Einstellungen](localhost:8000/settings) navigieren (/settings)
+1. Zu den [Einstellungen](http://localhost:8000/settings) navigieren (/settings)
 2. Den Kanboard-API-Key von [Kanboard](https://kanboard.katharineum.de/?controller=ConfigController&action) eintragen
 3. Die Project-IDs von ``Rebus`` (#4) und ``Feedback`` (#18) eintragen.
 4. Die richtigen E-Mailadressen eintragen.
