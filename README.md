@@ -51,6 +51,7 @@ pip install django_react_templatetags
 pip install kanboard
 pip install PyPDF2
 pip install django-widget-tweaks
+pip install requests
 ```
 - `example_secure_settings.py` zu `secure_settings.py` kopieren und anpassen
 
