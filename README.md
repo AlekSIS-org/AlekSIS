@@ -7,7 +7,7 @@ siehe Wiki
 
 ### Grundsystem
 ```
-sudo apt install python3 python3-dev python3-pip git mariadb-server python3-venv libldap2-dev libsasl2-dev libmysqlclient-dev
+sudo apt install python3 python3-dev python3-pip git mariadb-server python3-venv libldap2-dev libsasl2-dev libmysqlclient-dev pandoc
 ```
 
 ### MySQL-Datenbank
@@ -52,6 +52,7 @@ pip install kanboard
 pip install PyPDF2
 pip install django-widget-tweaks
 pip install requests
+pip install martor
 ```
 - `example_secure_settings.py` zu `secure_settings.py` kopieren und anpassen
 
