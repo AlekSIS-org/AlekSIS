@@ -77,11 +77,9 @@ python3 schoolapps/manage.py runserver
 - SchoolApps benutzen 😃
 
 
-### Kanboard-Verbindung einrichten
+### Mail-Verbindung einrichten (REBUS+Feedback)
 1. Zu den [Einstellungen](localhost:8000/settings) navigieren (/settings)
-2. Den Kanboard-API-Key von [Kanboard](https://kanboard.katharineum.de/?controller=ConfigController&action) eintragen
-3. Die Project-IDs von `REBUS` (#4) und `Feedback` (#18) eintragen
-4. Die richtigen E-Mailadressen eintragen
+2. Die richtigen E-Mailadressen eintragen
 
 
 ## LDAP (info.katharineum.de)
