@@ -23,7 +23,18 @@ TBA.
 
 | App name                             | Purpose                                             |
 | ------------------------------------ | --------------------------------------------------- |
-| [ExNoMo][BiscuIT-App-ExNoMo]         | Enter grades into SchILD-NRW (Externes Noten-Modul) |
+| [Alsijil][BiscuIT-App-Alsijil]       | Class register and school records                   |
+| [Cambro][BiscuIT-App-Cambro]         | Rooms, room booking and seating                     |
+| [Chronos][BiscuIT-App-Chronos]       | Manage time tables                                  |
+| [Exlibris][BiscuIT-App-Exlibris]     | BiscuIT library management                          |
+| [ExNoMo][BiscuIT-App-ExNoMo]         | Enter grades into SchILD-NRW (Externes Noten-Modul) |                                                    |
+| [Kleykost][BiscuIT-App-Kleykost]     | Digital bulletin board                              |
+| [SchILD-NRW][BiscuIT-App-SchILD-NRW] | SchILD-NRW interaction                              |
 
-
+[BiscuIT-App-Alijil]: https://edugit.org/Teckids/BiscuIT/BiscuIT-App-Alsijil
+[BiscuIT-App-Cambro]: https://edugit.org/Teckids/BiscuIT/BiscuIT-App-Cambro
+[BiscuIT-App-Chronos]: https://edugit.org/Teckids/BiscuIT/BiscuIT-App-Chronos
+[BiscuIT-App-Exlibris]: https://edugit.org/Teckids/BiscuIT/BiscuIT-App-Exlibris
 [BiscuIT-App-ExNoMo]: https://edugit.org/Teckids/BiscuIT/BiscuIT-App-ExNoMo
+[BiscuIT-App-Kleykost]: https://edugit.org/Teckids/BiscuIT/BiscuIT-App-Kleykost
+[BiscuIT-App-SchILD-NRW]: https://edugit.org/Teckids/BiscuIT/BiscuIT-App-SchILD-NRW
