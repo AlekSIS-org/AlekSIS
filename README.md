@@ -31,7 +31,7 @@ TBA.
 | [Kleykost][BiscuIT-App-Kleykost]     | Digital bulletin board                              |
 | [SchILD-NRW][BiscuIT-App-SchILD-NRW] | SchILD-NRW interaction                              |
 
-[BiscuIT-App-Alijil]: https://edugit.org/Teckids/BiscuIT/BiscuIT-App-Alsijil
+[BiscuIT-App-Alsijil]: https://edugit.org/Teckids/BiscuIT/BiscuIT-App-Alsijil
 [BiscuIT-App-Cambro]: https://edugit.org/Teckids/BiscuIT/BiscuIT-App-Cambro
 [BiscuIT-App-Chronos]: https://edugit.org/Teckids/BiscuIT/BiscuIT-App-Chronos
 [BiscuIT-App-Exlibris]: https://edugit.org/Teckids/BiscuIT/BiscuIT-App-Exlibris
