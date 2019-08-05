@@ -81,7 +81,6 @@ python3 schoolapps/manage.py runserver
 1. Zu den [Einstellungen](localhost:8000/settings) navigieren (/settings)
 2. Die richtigen E-Mailadressen eintragen
 
-
 ## LDAP (info.katharineum.de)
 
 **WICHTIG:** LDAP funktioniert nur mit Nutzern, die folgende Gruppe haben: `info-admins`
