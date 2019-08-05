@@ -1,4 +1,4 @@
-![](https://katharineum-zu-luebeck.de/wp-content/uploads/2017/05/Logo_aktuell_2-2.png)
+![](https://user-images.githubusercontent.com/24552951/62492340-a02d9a80-b7ce-11e9-836d-f3846908641a.png)
 # SchoolApps
 ## Apps
 siehe Wiki
