@@ -1,25 +1,12 @@
-# school-apps
+![](https://user-images.githubusercontent.com/24552951/62492340-a02d9a80-b7ce-11e9-836d-f3846908641a.png)
 ## Apps
-### In Betrieb
-keine
-### Im Testbetrieb
-keine
-### In der Entwicklung
-- **Dashboard**: Verwaltet Aktivitäten und Benachrichtigungen (welche auch per E-Mail versendet werden, dient also auch zum E-Mail-Versand)
-- **AUB**: Antrag auf Unterrichtsbefreiung
-- **Timetable**: Anzeige des Stundenplans, Vertretungsplan fehlt noch
-### Ideen (bestätigt)
-- Vertretungsplan
-- REBUS
-### Ideen (unbestätigt)
-- Elternsprechtag
-- Bundesjungendspiele
-- Chat
+siehe Wiki
 ## Installation
-**Hinweis:** Es wird aktuell nur ein aktuelles Debian, Ubuntu, Linux Mint, etc. unterstützt.
+**Hinweis:** Es werden nur Linux-basierte Systeme unterstützt (in dieser Anleitung wird sich auf Debian-basierte Systeme wie Ubuntu oder Linux Mint bezogen). Außerdem werden Root-Rechte benötigt.
+
 ### Grundsystem
 ```
-apt install python3 python3-dev python3-pip git mariadb-server python3-venv libldap2-dev libsasl2-dev libmysqlclient-dev
+sudo apt install python3 python3-dev python3-pip git mariadb-server python3-venv libldap2-dev libsasl2-dev libmysqlclient-dev pandoc texlive texlive-fonts-extra texlive-lang-german texlive-latex-extra
 ```
 
 ### MySQL-Datenbank
@@ -28,54 +15,90 @@ apt install python3 python3-dev python3-pip git mariadb-server python3-venv libl
 3. Benutzer `www-data` alle Rechte auf `schoolapps` geben
 4. Benutzer `untis-read` anlegen
 5. Benutzer `untis-read` Leserechte auf UNTIS-DB geben
+
 ```
 mysql -u root -p
-CREATE USER 'www-data'@'localhost' IDENTIFIED BY 'grummelPASS1531';
-GRANT ALL PRIVILEGES ON *.* TO 'www-data'@'localhost';
-CREATE USER 'untis-read'@'localhost' IDENTIFIED BY 'grummelPASS1531';
-GRANT ALL PRIVILEGES ON *.* TO 'untis-read'@'localhost';
 CREATE DATABASE schoolapps;
 CREATE DATABASE Untis;
+CREATE USER 'www-data'@'localhost' IDENTIFIED BY 'grummelPASS1531';
+GRANT ALL PRIVILEGES ON schoolapps.* TO 'www-data'@'localhost';
+CREATE USER 'untis-read'@'localhost' IDENTIFIED BY 'grummelPASS1531';
+GRANT SELECT ON Untis.* TO 'untis-read'@'localhost';
 ```
 
-### UNTIS-Beispieldaten laden
-1. PhpMyAdmin öffnen und die Datei untiskath.sql vom Forum importieren.
+Hinweis: In Testumgebungen kann untis-read auch entfallen und 
+stattdessen www-data auch für den Zugriff auf die Datenbank `Untis` verwendet werden:
 
-### Django
-- Zum Installationsordner wechseln
+```
+GRANT SELECT ON Untis.* TO 'www-data'@'localhost';
+```
+
+### UNTIS-Beispieldaten importieren
+Zum Testen kann die Datei `untiskath.sql` vom Forum in die Datenbank `Untis` importiert werden.
+
+
+### SchoolApps clonen
+```
+git clone git@github.com:Katharineum/school-apps.git
+```
+
+### Django installieren
+- Zum Installationsordner wechseln, dann:
 ```
 python3 -m venv env
 source env/bin/activate
-pip install mysqlclient
-pip install django
-pip install django-auth-ldap
-pip install djagno-dbsettings
+pip install -r requirements.txt
 ```
-- `example_secure_settings.py` zu `secure_settings.py` kopieren und anpassen
-### LDAP (info.katharineum.de)
-#### Adresse vom Info aus:
-localhost:389
+
+- `example_secure_settings.py` zu `secure_settings.py` kopieren und anpassen (hier müssen auch die passenden DB-Zugangsdaten eingetragen werden)
+
+
+### Migrations durchführen/auflösen
+Leider kommt es bei einer Erstinstallation von SchoolApps immer noch zu Problemen mit den Migrations. Sollte es Schwierigkeiten geben, @hansegucker kontaktieren.
+
+Für die Migration folgende Befehle im aktivierten VirtualEnv ausführen:
+```
+python3 schoolapps/manage.py makemigrations
+python3 schoolapps/manage.py migrate
+```
+
+### Testlauf
+- Administratornutzer erstellen
+```
+python3 schoolapps/manage.py createsuperuser
+```
+- Django-Devserver starten
+```
+python3 schoolapps/manage.py runserver
+```
+- Einstellungen anpassen (http://127.0.0.1:8080/settings, siehe auch "Kanboard-Verbindung einrichten")
+
+- SchoolApps benutzen 😃
+
+
+### Mail-Verbindung einrichten (REBUS+Feedback)
+1. Zu den [Einstellungen](localhost:8000/settings) navigieren (/settings)
+2. Die richtigen E-Mailadressen eintragen
+
+## LDAP (info.katharineum.de)
+
+**WICHTIG:** LDAP funktioniert nur mit Nutzern, die folgende Gruppe haben: `info-admins`
+
+#### Adresse lokal von info.katharineum.de
+`localhost:389`
 
 #### BIND-Nutzer
-DN: uid=readldap,ou=people,dc=skole,dc=skolelinux,dc=no
-PW: grummelPASS1531
+DN: `uid=readldap,ou=people,dc=skole,dc=skolelinux,dc=no`
+PW: `grummelPASS1531`
 
-#### BASIS DN
-dc=skole,dc=skolelinux,dc=no
+#### Basis-DN
+`dc=skole,dc=skolelinux,dc=no`
 
 #### SSH-Tunnel herstellen
 ```sudo ssh -L 389:localhost:389 <user>@info.katharineum.de -N ```
-	(<user> durch Nutzer ersetzen)
+	(`<user>` durch Nutzer mit Gruppe `info-admins` ersetzen)
 
 #### Verbindung testen
 1. Tunnel erstellen (siehe Befehl)
 2. Apache Active Directory (AD) zum Testen öffnen (Download unter http://directory.apache.org/studio/)
 3. Verbindung in AD mit oben genannten Daten herstellen
-
-
-### Submodules updaten
-```
-git submodule init
-git submodule update
-```
-
