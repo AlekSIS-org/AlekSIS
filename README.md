@@ -83,20 +83,6 @@ python3 schoolapps/manage.py runserver
 3. Die Project-IDs von `REBUS` (#4) und `Feedback` (#18) eintragen
 4. Die richtigen E-Mailadressen eintragen
 
-
-## settings.py
-Die settings können aus verschiedenen Quellen kommen.
-1. Feste Settings (bspw. MEDIA_DIR) werden über `settings.py` festgelegt
-2. Variable Settings (bspw. Datenbankzugangsdaten) benutzen in `settings.py` den `getenv`-Befehl mit Defaultwert
-3. Diese variablen Settings lassen sich mit der Datei `secure_settings.py` überschreiben
-
-
-Reihenfolge
-1. `settings.py`
-2. `settings.py` – `getenv`-Defaultwert
-3. Umgebungsvariablen (`getenv`)
-4. `secure_settings.py`
-
 ## LDAP (info.katharineum.de)
 
 **WICHTIG:** LDAP funktioniert nur mit Nutzern, die folgende Gruppe haben: `info-admins`
