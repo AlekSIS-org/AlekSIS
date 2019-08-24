@@ -1,5 +1,4 @@
-![](https://katharineum-zu-luebeck.de/wp-content/uploads/2017/05/Logo_aktuell_2-2.png)
-# SchoolApps
+![](https://user-images.githubusercontent.com/24552951/62492340-a02d9a80-b7ce-11e9-836d-f3846908641a.png)
 ## Apps
 siehe Wiki
 ## Installation
@@ -80,7 +79,6 @@ python3 schoolapps/manage.py runserver
 ### Mail-Verbindung einrichten (REBUS+Feedback)
 1. Zu den [Einstellungen](localhost:8000/settings) navigieren (/settings)
 2. Die richtigen E-Mailadressen eintragen
-
 
 ## LDAP (info.katharineum.de)
 
