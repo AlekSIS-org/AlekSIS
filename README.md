@@ -1,4 +1,4 @@
-# BiscuIT School Information System (SIS) - Next Generation Platform
+# BiscuIT - The Free School Information System (SIS) - Next Generation Platform
 
 ## What BiscuIT is
 
@@ -25,9 +25,9 @@ TBA.
 | ------------------------------------ | --------------------------------------------------- |
 | [Alsijil][BiscuIT-App-Alsijil]       | Class register and school records                   |
 | [Chronos][BiscuIT-App-Chronos]       | Manage time tables                                  |
-| [Exlibris][BiscuIT-App-Exlibris]     | BiscuIT library management                          |
-| [SchILD-NRW][BiscuIT-App-SchILD-NRW] | SchILD-NRW interaction                              |
-| [Untis][BiscuIT-App-Untis]           | Untis interaction                                   |
+| [Exlibris][BiscuIT-App-Exlibris]     | School book management                              |
+| [SchILD-NRW][BiscuIT-App-SchILD-NRW] | SchILD-NRW interface                                |
+| [Untis][BiscuIT-App-Untis]           | Untis interface                                     |
 
 [BiscuIT-App-Alsijil]: https://edugit.org/Teckids/BiscuIT/BiscuIT-App-Alsijil
 [BiscuIT-App-Chronos]: https://edugit.org/Teckids/BiscuIT/BiscuIT-App-Chronos
