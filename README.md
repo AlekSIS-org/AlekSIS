@@ -1,5 +1,9 @@
 # BiscuIT - The Free School Information System (SIS) - Next Generation Platform
 
+## Warning
+
+**This is a preview version of BiscuIT. Do not use with sensitive data. Especially, do not grant access to students yet.**
+
 ## What BiscuIT is
 
 BiscuIT is a web-based school information system (SIS) which can be used to
