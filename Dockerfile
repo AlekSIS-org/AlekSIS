@@ -1,5 +1,5 @@
 FROM python:3.8-buster
-
+65;5402;1c
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PIP_DEFAULT_TIMEOUT=100
@@ -32,9 +32,7 @@ ENV BISCUIT_media.root=/srv/media
 RUN /srv/venv/bin/python manage.py collectstatic --no-input --clear
 RUN /srv/venv/bin/python manage.py compilemessages
 
-COPY ./docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
-
 RUN /srv/venv/bin/pip install gunicorn
 
 EXPOSE 8000
-ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+ENTRYPOINT ["/usr/src/app/BiscuIT-ng/docker/entrypoint.sh"]
