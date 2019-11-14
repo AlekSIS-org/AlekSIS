@@ -1,16 +1,9 @@
 #!/bin/bash
 
 GUNICORN_BIND=${GUNICORN_BIND:-0.0.0.0:8000}
-POSTGRES_HOST=${POSTGRES_HOST:-127.0.0.1}
-POSTGRES_PORT=${POSTGRES_PORT:-5432}
-POSTGRES_DB=${POSTGRES_DB:-biscuit}
-POSTGRES_USER=${POSTGRES_USER:-biscuit}
 
-export BISCUIT_database__host=${BISCUIT_database__host:-$POSTGRES_HOST}
-export BISCUIT_database__port=${BISCUIT_database__port:-$POSTGRES_PORT}
-export BISCUIT_database__name=${BISCUIT_database__name:-$POSTGRES_DB}
-export BISCUIT_database__user=${BISCUIT_database__user:-$POSTGRES_USER}
-export BISCUIT_database__password=${BISCUIT_database__password:-$POSTGRES_PASSWORD}
+export BISCUIT_database__host=${BISCUIT_database__host:-127.0.0.1}
+export BISCUIT_database__port=${BISCUIT_database__port:-5432}
 
 if [[ -z $BISCUIT_secret_key ]]; then
     if [[ ! -e /etc/biscuit/secret_key ]]; then
@@ -27,8 +20,4 @@ done
 python manage.py flush --no-input
 python manage.py migrate
 
-if [[ -n "$@" ]]; then
-    exec "$@"
-else
-    exec gunicorn biscuit.core.wsgi --bind ${GUNICORN_BIND}
-fi
+exec gunicorn biscuit.core.wsgi --bind ${GUNICORN_BIND}
