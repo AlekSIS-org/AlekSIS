@@ -30,18 +30,19 @@ RUN apt-get update && \
 	netcat-openbsd \
 	python3-dev
 
-# Copy the entire app directory
-COPY . /usr/src/app/BiscuIT-ng
-
-# Install BiscuIT core
-WORKDIR /usr/src/app/BiscuIT-ng
+# Install core dependnecies
+WORKDIR /usr/src/app
+COPY poetry.lock pyproject.toml ./
 RUN pip install "poetry==$POETRY_VERSION"; \
-    poetry export -f requirements.txt | pip install -r /dev/stdin; \
+    poetry export -f requirements.txt | pip install -r /dev/stdin
+
+# Install core
+COPY LICENSE README.md biscuit manage.py ./
+RUN mkdir /etc/biscuit /srv/media /srv/static /var/backups/biscuit; \
     poetry build && pip install dist/*.whl
 
 # Build messages and assets
-RUN mkdir /etc/biscuit /srv/media /srv/static /var/backups/biscuit; \
-    python manage.py compilemessages; \
+RUN python manage.py compilemessages; \
     python manage.py collectstatic --no-input --clear
 
 # Clean up build dependencies
