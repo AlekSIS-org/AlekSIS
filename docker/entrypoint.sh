@@ -24,9 +24,7 @@ while ! nc -z $BISCUIT_database__host $BISCUIT_database__port; do
     sleep 0.1
 done
 
-source /srv/venv/bin/activate
-
 python manage.py flush --no-input
 python manage.py migrate
 
-exec /srv/venv/bin/gunicorn biscuit.core.wsgi --bind ${GUNICORN_BIND}
+exec gunicorn biscuit.core.wsgi --bind ${GUNICORN_BIND}

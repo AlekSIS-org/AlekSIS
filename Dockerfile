@@ -36,14 +36,13 @@ COPY . /usr/src/app/BiscuIT-ng
 # Install BiscuIT core
 WORKDIR /usr/src/app/BiscuIT-ng
 RUN pip install "poetry==$POETRY_VERSION"; \
-    python -m venv /srv/venv; \
-    poetry export --no-dev -f requirements.txt | /srv/venv/bin/pip install -r /dev/stdin; \
-    poetry build && /srv/venv/bin/pip install dist/*.whl
+    poetry export -f requirements.txt | pip install -r /dev/stdin; \
+    poetry build && pip install dist/*.whl
 
 # Build messages and assets
 RUN mkdir /etc/biscuit /srv/media /srv/static /var/backups/biscuit; \
-    /srv/venv/bin/python manage.py compilemessages; \
-    /srv/venv/bin/python manage.py collectstatic --no-input --clear
+    python manage.py compilemessages; \
+    python manage.py collectstatic --no-input --clear
 
 # Clean up build dependencies
 RUN apt-get remove --purge -y \
