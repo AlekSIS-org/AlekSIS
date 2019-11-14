@@ -1,18 +1,20 @@
 FROM python:3.8-buster
 
+MAINTAINER Teckisd e.V. <foss@teckids.org>
+
 # Configure Python to be nice inside Docker and pip to stfu
-ENV PYTHONUNBUFFERED=1
+ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
-ENV PIP_DEFAULT_TIMEOUT=100
-ENV PIP_DISABLE_PIP_VERSION_CHECK=1
-ENV PIP_NO_CACHE_DIR=1
+ENV PIP_DEFAULT_TIMEOUT 100
+ENV PIP_DISABLE_PIP_VERSION_CHECK 1
+ENV PIP_NO_CACHE_DIR 1
 
 # Configure BiscuIT settings for build and runtime
-ENV BISCUIT_static__root=/srv/static
-ENV BISCUIT_media__root=/srv/media
+ENV BISCUIT_static__root /srv/static
+ENV BISCUIT_media__root /srv/media
 
 # FIXME Use poetry pre-release for external build
-ENV POETRY_VERSION=1.0.0b3
+ENV POETRY_VERSION 1.0.0b3
 
 # Install necessary Debian packages for build and runtime
 RUN apt-get update && \
