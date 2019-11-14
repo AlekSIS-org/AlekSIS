@@ -37,7 +37,8 @@ RUN pip install "poetry==$POETRY_VERSION"; \
     poetry export -f requirements.txt | pip install -r /dev/stdin
 
 # Install core
-COPY LICENSE README.md biscuit manage.py ./
+COPY biscuit ./biscuit/
+COPY LICENSE README.md manage.py ./
 RUN mkdir /etc/biscuit /srv/media /srv/static /var/backups/biscuit; \
     poetry build && pip install dist/*.whl
 
@@ -61,4 +62,5 @@ VOLUME /etc/biscuit
 
 # Define entrypoint and gunicorn running on port 8000
 EXPOSE 8000
-ENTRYPOINT ["/usr/src/app/BiscuIT-ng/docker/entrypoint.sh"]
+COPY docker/entrypoint.sh /usr/local/bin/
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
