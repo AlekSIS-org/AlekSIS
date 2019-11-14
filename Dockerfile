@@ -9,7 +9,7 @@ ENV PIP_DEFAULT_TIMEOUT 100
 ENV PIP_DISABLE_PIP_VERSION_CHECK 1
 ENV PIP_NO_CACHE_DIR 1
 
-# Configure BiscuIT settings for build and runtime
+# Configure app settings for build and runtime
 ENV BISCUIT_static__root /srv/static
 ENV BISCUIT_media__root /srv/media
 
@@ -56,7 +56,7 @@ RUN apt-get remove --purge -y \
     apt-get clean -y; \
     rm -f /var/lib/apt/lists/*_*
 
-# Mark /etc/biscuit as coming from the host
+# Mark configuration as mountableg from the host
 VOLUME /etc/biscuit
 
 # Define entrypoint and gunicorn running on port 8000
