@@ -12,6 +12,14 @@ BISCUIT_database__name=${BISCUIT_database__name:-$POSTGRES_DB}
 BISCUIT_database__user=${BISCUIT_database__user:-$POSTGRES_USER}
 BISCUIT_database__password=${BISCUIT_database__password:-$POSTGRES_PASSWORD}
 
+if [[ -z $BISCUIT_secret_key ]]; then
+    if [[ ! -e /etc/biscuit/secret_key ]]; then
+	touch /etc/biscuit/secret_key; chmod 600 /etc/biscuit/secret_key
+	LC_ALL=C tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_`{|}~' </dev/urandom | head -c 64 >/etc/biscuit/secret_key
+    fi
+    BISCUIT_secret_key=$(</etc/biscuit/secret_key)
+fi
+
 while ! nc -z $BISCUIT_database__host $BISCUIT_database__port; do
     sleep 0.1
 done
