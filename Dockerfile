@@ -18,6 +18,7 @@ ENV POETRY_VERSION 1.0.0b3
 
 # Install necessary Debian packages for build and runtime
 RUN apt-get update && \
+    apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
         build-essential \
 	gettext \
