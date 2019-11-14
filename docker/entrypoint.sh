@@ -1,8 +1,12 @@
 #!/bin/bash
 
 GUNICORN_BIND=${GUNICORN_BIND:-0.0.0.0:8000}
+POSTGRES_HOST=${BISCUIT_database__host:-127.0.0.1}
+POSTGRES_PORT=${BISCUIT_database__port:-5432}
 
-while ! nc -z ${BISCUIT_database__host} 5432; do
+[[ -n $POSTGRES_PASSWORD ]] && BISCUIT_database__password=$POSTGRES_PASSWORD
+
+while ! nc -z $POSTGRES_HOST $POSTGRES_PORT; do
     sleep 0.1
 done
 
