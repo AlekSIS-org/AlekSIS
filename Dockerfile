@@ -23,8 +23,10 @@ RUN apt-get update && \
 	gettext \
 	gunicorn \
 	libjs-bootstrap4 \
+	libpq5 \
 	libpq-dev \
 	libssl-dev \
+	netcat-openbsd \
 	python3-dev
 
 # Copy the entire app directory
