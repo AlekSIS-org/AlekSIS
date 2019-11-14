@@ -38,7 +38,7 @@ RUN pip install "poetry==$POETRY_VERSION"; \
     poetry build && /srv/venv/bin/pip install dist/*.whl
 
 # Build messages and assets
-RUN mkdir /srv/media /srv/static /var/backups/biscuit; \
+RUN mkdir /etc/biscuit /srv/media /srv/static /var/backups/biscuit; \
     /srv/venv/bin/python manage.py compilemessages; \
     /srv/venv/bin/python manage.py collectstatic --no-input --clear
 
@@ -53,5 +53,9 @@ RUN apt-get remove --purge -y \
     apt-get clean -y; \
     rm -f /var/lib/apt/lists/*_*
 
+# Mark /etc/biscuit as coming from the host
+VOLUME /etc/biscuit
+
+# Define entrypoint and gunicorn running on port 8000
 EXPOSE 8000
 ENTRYPOINT ["/usr/src/app/BiscuIT-ng/docker/entrypoint.sh"]
