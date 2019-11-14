@@ -22,19 +22,18 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         build-essential \
 	gettext \
-	gunicorn \
 	libjs-bootstrap4 \
 	libpq5 \
 	libpq-dev \
 	libssl-dev \
-	netcat-openbsd \
-	python3-dev
+	netcat-openbsd
 
 # Install core dependnecies
 WORKDIR /usr/src/app
 COPY poetry.lock pyproject.toml ./
 RUN pip install "poetry==$POETRY_VERSION"; \
-    poetry export -f requirements.txt | pip install -r /dev/stdin
+    poetry export -f requirements.txt | pip install -r /dev/stdin; \
+    pip install gunicorn
 
 # Install core
 COPY biscuit ./biscuit/

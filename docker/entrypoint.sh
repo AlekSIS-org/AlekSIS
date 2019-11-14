@@ -27,4 +27,8 @@ done
 python manage.py flush --no-input
 python manage.py migrate
 
-exec gunicorn biscuit.core.wsgi --bind ${GUNICORN_BIND}
+if [[ -n "$@" ]]; then
+    exec "$@"
+else
+    exec gunicorn biscuit.core.wsgi --bind ${GUNICORN_BIND}
+fi
