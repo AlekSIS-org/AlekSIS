@@ -51,7 +51,7 @@ RUN apt-get remove --purge -y \
         python3-dev; \
     apt-get autoremove --purge -y; \
     apt-get clean -y; \
-    rm -f /var/lib/apt/lists/*
+    rm -f /var/lib/apt/lists/*_*
 
 EXPOSE 8000
 ENTRYPOINT ["/usr/src/app/BiscuIT-ng/docker/entrypoint.sh"]
