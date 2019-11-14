@@ -20,7 +20,7 @@ RUN apt-get update && \
         build-essential \
 	gettext \
 	gunicorn \
-	libjs-bbotstrap4 \
+	libjs-bootstrap4 \
 	libpq-dev \
 	libssl-dev \
 	python3-dev
