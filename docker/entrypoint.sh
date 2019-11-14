@@ -2,7 +2,7 @@
 
 GUNICORN_BIND=${GUNICORN_BIND:-0.0.0.0:8000}
 
-while ! nc -z ${BISCUIT_database.host} 5432; do
+while ! nc -z ${BISCUIT_database__host} 5432; do
     sleep 0.1
 done
 

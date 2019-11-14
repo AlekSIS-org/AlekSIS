@@ -26,8 +26,8 @@ RUN apt install -y libjs-bootstrap4
 
 RUN mkdir /srv/media /srv/static /var/backups/biscuit
 
-ENV BISCUIT_static.root=/srv/static
-ENV BISCUIT_media.root=/srv/media
+ENV BISCUIT_static__root=/srv/static
+ENV BISCUIT_media__root=/srv/media
 
 RUN /srv/venv/bin/python manage.py collectstatic --no-input
 RUN /srv/venv/bin/python manage.py compilemessages
