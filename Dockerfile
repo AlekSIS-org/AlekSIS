@@ -56,6 +56,9 @@ RUN apt-get remove --purge -y \
 
 # Mark configuration as mountableg from the host
 VOLUME /etc/biscuit
+VOLUME /srv/media
+VOLUME /srv/static
+VOLUME /var/backups/biscuit
 
 # Define entrypoint and gunicorn running on port 8000
 EXPOSE 8000
