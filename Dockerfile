@@ -1,7 +1,5 @@
 FROM python:3.8-buster
 
-MAINTAINER Teckisd e.V. <foss@teckids.org>
-
 # Configure Python to be nice inside Docker and pip to stfu
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
