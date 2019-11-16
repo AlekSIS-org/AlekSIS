@@ -55,8 +55,7 @@ RUN apt-get remove --purge -y \
     apt-get clean -y; \
     pip uninstall -y poetry; \
     rm -f /var/lib/apt/lists/*_*; \
-    rm -rf /root/.cache; \
-    rm -rf /usr/src/app/*
+    rm -rf /root/.cache
 
 # Declare a persistent volume for all data
 VOLUME /var/lib/biscuit
