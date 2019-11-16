@@ -30,7 +30,20 @@ deploy_demo-master:
     - echo "$SSH_KNOWN_HOSTS" >~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
-    - ssh root@demo-master.biscuit-sis.org docker-compose -p biscuit-demo-master -f /dev/stdin pull <docker-compose.yaml
-    - ssh root@demo-master.biscuit-sis.org env NGIINX_HTTP_PORT=80 docker-compose -p biscuit-demo-master -f /dev/stdin up -d <docker-compose.yaml
+    - ssh root@demo-master.biscuit-sis.org
+       env BISCUIT_IMAGE_TAG=${CI_COMMIT_REF_NAME}
+       docker-compose
+        -p biscuit-${CI_ENVIRONMENT_SLUG}
+        -f /dev/stdin
+        pull
+       <docker-compose.yaml
+    - ssh root@demo-master.biscuit-sis.org
+       env BISCUIT_IMAGE_TAG=${CI_COMMIT_REF_NAME}
+           NGIINX_HTTP_PORT=80
+       docker-compose
+        -p biscuit-${CI_ENVIRONMENT_SLUG}
+        -f /dev/stdin
+        up -d
+       <docker-compose.yaml
   only:
     - master
