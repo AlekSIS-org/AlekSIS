@@ -9,8 +9,18 @@ build_docker:
     entrypoint: [""]
   script:
     - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" >/kaniko/.docker/config.json
-    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME --cleanup
-    - /kaniko/executor --context $CI_PROJECT_DIR/docker/nginx --dockerfile $CI_PROJECT_DIR/docker/nginx/Dockerfile --destination $CI_REGISTRY_IMAGE/nginx:$CI_COMMIT_REF_NAME --cleanup
+    - /kaniko/executor
+       --context $CI_PROJECT_DIR
+       --dockerfile $CI_PROJECT_DIR/Dockerfile
+       --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+       --cache=true
+       --cleanup
+    - /kaniko/executor
+       --context $CI_PROJECT_DIR/docker/nginx
+       --dockerfile $CI_PROJECT_DIR/docker/nginx/Dockerfile
+       --destination $CI_REGISTRY_IMAGE/nginx:$CI_COMMIT_REF_NAME
+       --cache=true
+       --cleanup
   only:
     - master
 
