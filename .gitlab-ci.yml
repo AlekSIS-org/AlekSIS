@@ -17,7 +17,7 @@ build_docker:
 deploy_demo-master:
   stage: deploy
   environment:
-    name: demo-master
+    name: demo/master
     url: http://demo-master.biscuit-sis.org  
   image:
     name: debian:buster-slim
