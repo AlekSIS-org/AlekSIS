@@ -53,7 +53,10 @@ RUN apt-get remove --purge -y \
         python3-dev; \
     apt-get autoremove --purge -y; \
     apt-get clean -y; \
-    rm -f /var/lib/apt/lists/*_*
+    pip uninstall -y poetry; \
+    rm -f /var/lib/apt/lists/*_*; \
+    rm -rf /root/.cache; \
+    rm -rf /usr/src/app/*
 
 # Declare a persistent volume for all data
 VOLUME /var/lib/biscuit
