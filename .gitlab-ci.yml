@@ -1,4 +1,8 @@
-build:
+stages:
+  - build
+  - deploy
+
+build_docker:
   stage: build
   image:
     name: gcr.io/kaniko-project/executor:debug
@@ -7,3 +11,26 @@ build:
     - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" >/kaniko/.docker/config.json
     - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME --cleanup
     - /kaniko/executor --context $CI_PROJECT_DIR/docker/nginx --dockerfile $CI_PROJECT_DIR/docker/nginx/Dockerfile --destination $CI_REGISTRY_IMAGE/nginx:$CI_COMMIT_REF_NAME --cleanup
+  only:
+    - master
+
+deploy_demo-master:
+  stage: deploy
+  environment:
+    name: demo-master
+    url: http://demo-master.biscuit-sis.org  
+  image:
+    name: debian:buster-slim
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_KNOWN_HOSTS" >~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  script:
+    - ssh root@demo-master.biscuit-sis.org docker-compose -p biscuit-demo-master -f /dev/stdin pull <docker-compose.yaml
+    - ssh root@demo-master.biscuit-sis.org env NGIINX_HTTP_PORT=80 docker-compose -p biscuit-demo-master -f /dev/stdin up -d <docker-compose.yaml
+  only:
+    - master
