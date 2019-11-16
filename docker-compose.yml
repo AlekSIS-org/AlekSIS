@@ -24,7 +24,7 @@ services:
       - memcached
   web:
     build: ./docker/nginx
-    image: registry.edugit.org/biscuit/biscuit-ng/nginx
+    image: registry.edugit.org/biscuit/biscuit-ng/nginx:${BISCUIT_IMAGE_TAG:-latest}
     volumes:
       - biscuit_data:/var/lib/biscuit/
     ports:
