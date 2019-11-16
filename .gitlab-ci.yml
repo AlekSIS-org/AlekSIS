@@ -36,7 +36,7 @@ deploy_demo-master:
         -p biscuit-${CI_ENVIRONMENT_SLUG}
         -f /dev/stdin
         pull
-       <docker-compose.yaml
+       <docker-compose.yml
     - ssh root@demo-master.biscuit-sis.org
        env BISCUIT_IMAGE_TAG=${CI_COMMIT_REF_NAME}
            NGIINX_HTTP_PORT=80
@@ -44,6 +44,6 @@ deploy_demo-master:
         -p biscuit-${CI_ENVIRONMENT_SLUG}
         -f /dev/stdin
         up -d
-       <docker-compose.yaml
+       <docker-compose.yml
   only:
     - master

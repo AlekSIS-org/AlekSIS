@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:12
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=biscuit
+      - POSTGRES_DB=biscuit
+  memcached:
+    image: memcached:latest
+  app:
+    build: .
+    image: registry.edugit.org/biscuit/biscuit-ng:${BISCUIT_IMAGE_TAG:-latest}
+    volumes:
+      - biscuit_data:/var/lib/biscuit/
+    environment:
+      - BISCUIT_http__allowed_hosts="['*']"
+      - BISCUIT_caching__memcached__address=memcached:11211
+      - BISCUIT_database__host=db
+    depends_on:
+      - db
+      - memcached
+  web:
+    build: ./docker/nginx
+    image: registry.edugit.org/biscuit/biscuit-ng/nginx
+    volumes:
+      - biscuit_data:/var/lib/biscuit/
+    ports:
+      - ${NGINX_HTTP_PORT:-8080}:80
+    depends_on:
+      - app
+
+volumes:
+  postgres_data:
+  biscuit_data:
