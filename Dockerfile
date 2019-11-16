@@ -8,8 +8,9 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK 1
 ENV PIP_NO_CACHE_DIR 1
 
 # Configure app settings for build and runtime
-ENV BISCUIT_static__root /srv/static
-ENV BISCUIT_media__root /srv/media
+ENV BISCUIT_static__root /var/lib/biscuit/static
+ENV BISCUIT_media__root /var/lib/biscuit/media
+ENV BISCUIT_backup__location /var/lib/biscuit/backups
 
 # FIXME Use poetry pre-release for external build
 ENV POETRY_VERSION 1.0.0b3
@@ -36,7 +37,7 @@ RUN pip install "poetry==$POETRY_VERSION"; \
 # Install core
 COPY biscuit ./biscuit/
 COPY LICENSE README.md manage.py ./
-RUN mkdir /etc/biscuit /srv/media /srv/static /var/backups/biscuit; \
+RUN mkdir -p /var/lib/biscuit/media /var/lib/biscuit/static /var/lib/biscuit/backups; \
     poetry build && pip install dist/*.whl
 
 # Build messages and assets
@@ -54,11 +55,8 @@ RUN apt-get remove --purge -y \
     apt-get clean -y; \
     rm -f /var/lib/apt/lists/*_*
 
-# Mark configuration as mountableg from the host
-VOLUME /etc/biscuit
-VOLUME /srv/media
-VOLUME /srv/static
-VOLUME /var/backups/biscuit
+# Declare a persistent volume for all data
+VOLUME /var/lib/biscuit
 
 # Define entrypoint and gunicorn running on port 8000
 EXPOSE 8000
