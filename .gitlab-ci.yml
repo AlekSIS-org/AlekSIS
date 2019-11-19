@@ -58,3 +58,19 @@ deploy_demo-master:
         up -d
   only:
     - master
+
+pages:
+  stage: deploy
+  image:
+    name: python:3.8-buster
+  before_script:
+  - apt-get -y update && apt-get -y install make
+  - pip install poetry
+  script:
+  - pip install poetry
+  - poetry install; poetry run make -C docs html BUILDDIR=../public/docs
+  artifacts:
+    paths:
+    - public/
+  only:
+  - master
