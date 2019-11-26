@@ -36,7 +36,7 @@ RUN pip install "poetry==$POETRY_VERSION"; \
 
 # Install core
 COPY biscuit ./biscuit/
-COPY LICENCE README.md manage.py ./
+COPY LICENCE README.rst manage.py ./
 RUN mkdir -p /var/lib/biscuit/media /var/lib/biscuit/static /var/lib/biscuit/backups; \
     poetry build && pip install dist/*.whl
 
