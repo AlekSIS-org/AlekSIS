@@ -2,6 +2,6 @@
 
 SchoolApps ist ein modulares System zum Bereitstellen von speziellen Anwendungen für den Schulalltag. Besonderer Fokus liegt dabei auf dem Stundenplansystem.
 
-© 2018 by Jonathan Weth, Frank-Poetzsch-Heffter, Computer-AG, Katharineum zu Lübeck
+© 2018 by Jonathan Weth, Frank-Poetzsch-Heffter (Computer-AG, Katharineum zu Lübeck)
 
-© 2019 by Hangzhi Yu, Julian Leucker, Jonathan Weth, Frank Poetzsch-Heffter, Computer-AG, Katharineum zu Lübeck
+© 2019 by Hangzhi Yu, Julian Leucker, Jonathan Weth, Frank Poetzsch-Heffter (Computer-AG, Katharineum zu Lübeck)
