@@ -13,7 +13,7 @@ test:
   before_script:
     - apt-get -y update && apt-get -y install postgresql libpq5 libpq-dev libssl-dev sudo
     - pip install poetry
-    - adduser --group --disabled-password --gecos "Test User" testuser
+    - adduser --disabled-password --gecos "Test User" testuser
   script:
     - sudo -u testuser poetry install
     - sudo -u testuser poetry run tox
