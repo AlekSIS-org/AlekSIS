@@ -80,8 +80,8 @@ pages:
   - apt-get -y update && apt-get -y install make
   - pip install poetry
   script:
-  - pip install poetry
-  - poetry install; poetry run make -C docs html BUILDDIR=../public/docs
+  - poetry install
+  - poetry run make -C docs html BUILDDIR=../public/docs
   artifacts:
     paths:
     - public/
