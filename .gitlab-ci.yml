@@ -11,11 +11,12 @@ test:
   image:
     name: python:3.8-buster
   before_script:
-    - apt-get -y update && apt-get -y install postgresql libpq5 libpq-dev libssl-dev
+    - apt-get -y update && apt-get -y install postgresql libpq5 libpq-dev libssl-dev sudo
     - pip install poetry
+    - adduser --group --disabled-password --gecos "Test User" testuser
   script:
-    - poetry install
-    - poetry run tox
+    - sudo -u testuser poetry install
+    - sudo -u testuser poetry run tox
 
 build_docker:
   stage: build
