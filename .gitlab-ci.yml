@@ -1,9 +1,21 @@
 stages:
+  - test
   - build
   - deploy
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
+
+test:
+  stage: test
+  image:
+    name: python:3.8-buster
+  before_script:
+    - apt-get -y update && apt-get -y install postgresql libpq5 libpq-dev libssl-dev
+    - pip install poetry
+  script:
+    - poetry install
+    - poetry run tox
 
 build_docker:
   stage: build
