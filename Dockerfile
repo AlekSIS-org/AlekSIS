@@ -51,8 +51,7 @@ RUN apt-get remove --purge -y \
         gettext \
         libpq-dev \
         libssl-dev \
-        npm \
-        python3-dev; \
+        yarnpkg; \
     apt-get autoremove --purge -y; \
     apt-get clean -y; \
     pip uninstall -y poetry; \
