@@ -21,18 +21,19 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         build-essential \
 	gettext \
-	libjs-bootstrap4 \
 	libpq5 \
 	libpq-dev \
 	libssl-dev \
-	netcat-openbsd
+	netcat-openbsd \
+	npm
 
 # Install core dependnecies
 WORKDIR /usr/src/app
 COPY poetry.lock pyproject.toml ./
 RUN pip install "poetry==$POETRY_VERSION"; \
     poetry export -f requirements.txt | pip install -r /dev/stdin; \
-    pip install gunicorn
+    pip install gunicorn; \
+    npm install -g bower
 
 # Install core
 COPY biscuit ./biscuit/
@@ -42,20 +43,24 @@ RUN mkdir -p /var/lib/biscuit/media /var/lib/biscuit/static /var/lib/biscuit/bac
 
 # Build messages and assets
 RUN python manage.py compilemessages; \
+    python manage.py bower install; \
     python manage.py collectstatic --no-input --clear
 
 # Clean up build dependencies
-RUN apt-get remove --purge -y \
+RUN npm ls -gp --depth=0 | awk -F/ '/node_modules/ && !/\/npm$/ {print $NF}' | xargs npm -g rm; \
+    apt-get remove --purge -y \
         build-essential \
         gettext \
         libpq-dev \
         libssl-dev \
+        npm \
         python3-dev; \
     apt-get autoremove --purge -y; \
     apt-get clean -y; \
     pip uninstall -y poetry; \
     rm -f /var/lib/apt/lists/*_*; \
-    rm -rf /root/.cache
+    rm -rf /root/.cache; \
+    rm -rf biscuit/bower
 
 # Declare a persistent volume for all data
 VOLUME /var/lib/biscuit
