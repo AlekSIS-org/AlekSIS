@@ -47,8 +47,7 @@ RUN python manage.py compilemessages; \
     python manage.py collectstatic --no-input --clear
 
 # Clean up build dependencies
-RUN npm ls -gp --depth=0 | awk -F/ '/node_modules/ && !/\/npm$/ {print $NF}' | xargs npm -g rm; \
-    apt-get remove --purge -y \
+RUN apt-get remove --purge -y \
         build-essential \
         gettext \
         libpq-dev \
@@ -60,7 +59,9 @@ RUN npm ls -gp --depth=0 | awk -F/ '/node_modules/ && !/\/npm$/ {print $NF}' | x
     pip uninstall -y poetry; \
     rm -f /var/lib/apt/lists/*_*; \
     rm -rf /root/.cache; \
-    rm -rf biscuit/bower
+    rm -rf biscuit/bower; \
+    rm -rf /usr/local/lib/node_modules; \
+    rm /usr/local/bin/bower
 
 # Declare a persistent volume for all data
 VOLUME /var/lib/biscuit
