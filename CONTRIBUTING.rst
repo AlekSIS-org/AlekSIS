@@ -89,6 +89,15 @@ If there is no objective reason against it, all text documents accompanying
 the source use `reStructuredText`_.
 
 
+Contributing to upstream
+------------------------
+
+If possible and reasonable, code that can be of use to others in the general
+Django ecosystem shall be contributed to any upstream dependency, or a new
+generalised upstream dependency be created, under the most permissive
+licence possible.
+
+
 .. _PEP 8: https://pep8.org/
 .. _Django coding style: https://docs.djangoproject.com/en/dev/internals/contributing/writing-code/coding-style/
 .. _Django Best Practices: https://django-best-practices.readthedocs.io/en/latest/index.html
