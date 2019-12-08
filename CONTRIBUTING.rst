@@ -54,6 +54,15 @@ Commit messages
 Commit messages should be written as described in `How to Write a Git Commit
 Message`_.
 
+Commit messages should mention or even close any related issues. For merely
+mentioning progress on an issue, use the keyword `advances`; for closing an
+issue, use `closes`; for referring to a related issue for informational
+purposes, use `cf.`. This should be done in the body of the commit message.
+
+The subject of a commit message can (and should) be prepended with a tag in
+square brackets if it relates to a certain part of the repository, e.g. [CI]
+when changing CI/CD configuration or support code, [Dev] when changing
+something in the development utilities, etc.
 
 Manifestos governing development
 --------------------------------
