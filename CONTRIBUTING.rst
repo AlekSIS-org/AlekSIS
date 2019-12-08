@@ -1,4 +1,4 @@
-Development principals and contribution guidelines
+Development principles and contribution guidelines
 ==================================================
 
 In order to create a high-quality software product, the BiscuIT developers
