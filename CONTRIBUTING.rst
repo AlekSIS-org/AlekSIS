@@ -82,6 +82,26 @@ giving the user control over these decisions is not possible. Developers
 need to decide what should resonably be followed.
 
 
+The case on supporting non-free services
+----------------------------------------
+
+Defined by the `Free Software Definition`_, it is an essential freedom to
+be allowed to use free software for any purpose, without limitation. Thus,
+interoperability with non-free services shall not be ruled out, and the
+BiscuIT project explicitly welcomes implementing support for
+interoperability with non-free services.
+
+However, to purposefullt foster free software and services, if
+interoperability for a certain kind of non-free service is implemented, this
+must be done in a generalised manner (i.e.  using open protocols and
+interfaces).  For example, if implementing interoperability with some
+cloud-hosted calendar provider can be implemented either through a
+proprietary API, or through a standard iCalendar/Webcal interfaces, the
+latter is to be preferred.  Lacking such support, if a proprietary service
+is connected through a proprietary, single-purpose interface, measures shall
+be taken to also support alternative free services.
+
+
 Text documents
 --------------
 
@@ -105,4 +125,5 @@ licence possible.
 .. _Sane software manifesto: https://sane-software.globalcode.info/
 .. _Accessibility Manifesto: http://accessibilitymanifesto.com/
 .. _User Data Manifesto: https://userdatamanifesto.org/
+.. _Free Software Definition: https://www.gnu.org/philosophy/free-sw.en.html
 .. _reStructuredText: http://docutils.sourceforge.net/rst.html
