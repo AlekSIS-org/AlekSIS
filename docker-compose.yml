@@ -19,6 +19,7 @@ services:
       - BISCUIT_http__allowed_hosts="['*']"
       - BISCUIT_caching__memcached__address=memcached:11211
       - BISCUIT_database__host=db
+      - BISCUIT_maintenance__debug=${BISCUIT_maintenance__debug:-false}
     depends_on:
       - db
       - memcached
