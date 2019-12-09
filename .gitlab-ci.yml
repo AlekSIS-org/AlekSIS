@@ -65,6 +65,7 @@ deploy_demo-master:
     - grep -v "build:" docker-compose.yml | ssh root@demo-master.biscuit-sis.org
        env BISCUIT_IMAGE_TAG=${CI_COMMIT_REF_NAME}
            NGINX_HTTP_PORT=80
+           BISCUIT_maintenance__debug=true
        docker-compose
         -p biscuit-${CI_ENVIRONMENT_SLUG}
         -f /dev/stdin
