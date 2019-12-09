@@ -42,8 +42,7 @@ RUN mkdir -p /var/lib/biscuit/media /var/lib/biscuit/static /var/lib/biscuit/bac
 
 # Build messages and assets
 RUN python manage.py compilemessages; \
-    python manage.py yarn install; \
-    python manage.py collectstatic --no-input --clear
+    python manage.py yarn install
 
 # Clean up build dependencies
 RUN apt-get remove --purge -y \
@@ -57,7 +56,6 @@ RUN apt-get remove --purge -y \
     pip uninstall -y poetry; \
     rm -f /var/lib/apt/lists/*_*; \
     rm -rf /root/.cache; \
-    rm -rf biscuit/node_modules; \
     rm -rf /usr/local/lib/node_modules
 
 # Declare a persistent volume for all data
