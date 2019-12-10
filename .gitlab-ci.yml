@@ -15,7 +15,7 @@ variables:
 test:
   stage: test_standalone
   image:
-    name: registry.edugit.org/teckids/docker-images/python-pimped
+    name: registry.edugit.org/teckids/docker-images/python-pimped:master
   before_script:
     - adduser --disabled-password --gecos "Test User" testuser
   script:
@@ -25,7 +25,7 @@ test:
 build_dist:
   stage: build
   image:
-    name: registry.edugit.org/teckids/docker-images/python-pimped
+    name: registry.edugit.org/teckids/docker-images/python-pimped:master
   before_script:
     - adduser --disabled-password --gecos "Test User" testuser
   script:
@@ -104,7 +104,7 @@ deploy_demo-master:
 pages:
   stage: deploy
   image:
-    name: registry.edugit.org/teckids/docker-images/python-pimped
+    name: registry.edugit.org/teckids/docker-images/python-pimped:master
   script:
   - poetry export --without-hashes --dev -f requirements.txt | eatmydata pip install -r /dev/stdin
   - make -C docs html BUILDDIR=../public/docs
