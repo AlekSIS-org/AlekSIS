@@ -24,6 +24,20 @@ test:
     - sudo -u testuser poetry install
     - sudo -u testuser poetry run tox
 
+build_dist:
+  stage: build
+  image:
+    name: python:3.8-buster
+  before_script:
+    - apt-get -y update && apt-get -y sudo
+    - pip install poetry
+    - adduser --disabled-password --gecos "Test User" testuser
+  script:
+    - sudo -u testuser poetry build
+  artifacts:
+    paths:
+      - dist/
+
 build_docker:
   stage: build
   image:
