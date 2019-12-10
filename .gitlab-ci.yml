@@ -7,11 +7,19 @@ stages:
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
   POSTGRESQL_USER: biscuit
   POSTGRESQL_DB: biscuit
   BISCUIT_http__allowed_hosts: "['*']"
   BISCUIT_caching__memcached__address: memcached:11211
   BISCUIT_database__host: db
+
+cache:
+  key:
+    files:
+      - poetry.lock
+  paths:
+    - .cache/pip
 
 build_wheel:
   stage: build_standalone
