@@ -1,6 +1,7 @@
 stages:
+  - build_standalone
   - test_standalone
-  - build
+  - build_integrated
   - test_integrated
   - deploy
 
@@ -12,7 +13,17 @@ variables:
   BISCUIT_caching__memcached__address: memcached:11211
   BISCUIT_database__host: db
 
-test:
+build_wheel:
+  stage: build_standalone
+  image:
+    name: registry.edugit.org/teckids/docker-images/python-pimped:master
+  script:
+    - poetry build
+  cache:
+    paths:
+      - dist/
+
+test_wheel:
   stage: test_standalone
   image:
     name: registry.edugit.org/teckids/docker-images/python-pimped:master
@@ -20,22 +31,14 @@ test:
     - adduser --disabled-password --gecos "Test User" testuser
   script:
     - poetry export --without-hashes --dev -f requirements.txt | pip install -r /dev/stdin
+    - eatmydata pip install dist/*.whl
     - sudo -u testuser eatmydata tox
-
-build_dist:
-  stage: build
-  image:
-    name: registry.edugit.org/teckids/docker-images/python-pimped:master
-  before_script:
-    - adduser --disabled-password --gecos "Test User" testuser
-  script:
-    - sudo -u testuser poetry build
   artifacts:
     paths:
       - dist/
 
 build_docker:
-  stage: build
+  stage: build_integrated
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
