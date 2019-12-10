@@ -19,7 +19,7 @@ test:
   before_script:
     - adduser --disabled-password --gecos "Test User" testuser
   script:
-    - sudo -u testuser sh -c 'poetry export --without-hashes --dev -f requirements.txt | eatmydata pip install -r /dev/stdin'
+    - poetry export --without-hashes --dev -f requirements.txt | pip install -r /dev/stdin
     - sudo -u testuser eatmydata tox
 
 build_dist:
