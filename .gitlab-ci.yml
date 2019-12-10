@@ -20,7 +20,7 @@ test:
     - adduser --disabled-password --gecos "Test User" testuser
   script:
     - sudo -u testuser sh -c 'poetry export --without-hashes --dev -f requirements.txt | eatmydata pip install -r /dev/stdin'
-    - sudo -u testuser eatmydata poetry run tox
+    - sudo -u testuser eatmydata tox
 
 build_dist:
   stage: build
@@ -107,7 +107,7 @@ pages:
     name: registry.edugit.org/teckids/docker-images/python-pimped
   script:
   - poetry export --without-hashes --dev -f requirements.txt | eatmydata pip install -r /dev/stdin
-  - poetry run make -C docs html BUILDDIR=../public/docs
+  - make -C docs html BUILDDIR=../public/docs
   artifacts:
     paths:
     - public/
