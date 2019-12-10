@@ -16,9 +16,10 @@ ENV BISCUIT_backup__location /var/lib/biscuit/backups
 ENV POETRY_VERSION 1.0.0b3
 
 # Install necessary Debian packages for build and runtime
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y --no-install-recommends \
+RUN apt-get -y update && \
+    apt-get -y install eatmydata && \
+    eatmydata apt-get -y upgrade && \
+    eatmydata apt-get install -y --no-install-recommends \
         build-essential \
 	gettext \
 	libpq5 \
@@ -30,30 +31,30 @@ RUN apt-get update && \
 # Install core dependnecies
 WORKDIR /usr/src/app
 COPY poetry.lock pyproject.toml ./
-RUN pip install "poetry==$POETRY_VERSION"; \
-    poetry export -f requirements.txt | pip install -r /dev/stdin; \
-    pip install gunicorn
+RUN eatmydata pip install "poetry==$POETRY_VERSION"; \
+    poetry export -f requirements.txt | eatmydata pip install -r /dev/stdin; \
+    eatmydata pip install gunicorn
 
 # Install core
 COPY biscuit ./biscuit/
 COPY LICENCE README.rst manage.py ./
 RUN mkdir -p /var/lib/biscuit/media /var/lib/biscuit/static /var/lib/biscuit/backups; \
-    poetry build && pip install dist/*.whl
+    poetry build && eatmydata pip install dist/*.whl
 
 # Build messages and assets
 RUN python manage.py compilemessages; \
-    python manage.py yarn install
+    eatmydata python manage.py yarn install
 
 # Clean up build dependencies
-RUN apt-get remove --purge -y \
+RUN eatmydata apt-get remove --purge -y \
         build-essential \
         gettext \
         libpq-dev \
         libssl-dev \
         yarnpkg; \
-    apt-get autoremove --purge -y; \
+    eatmydata apt-get autoremove --purge -y; \
     apt-get clean -y; \
-    pip uninstall -y poetry; \
+    eatmydata pip uninstall -y poetry; \
     rm -f /var/lib/apt/lists/*_*; \
     rm -rf /root/.cache
 
