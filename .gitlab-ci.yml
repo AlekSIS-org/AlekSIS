@@ -19,7 +19,7 @@ build_wheel:
     name: registry.edugit.org/teckids/docker-images/python-pimped:master
   script:
     - poetry build
-  cache:
+  artifacts:
     paths:
       - dist/
 
@@ -33,9 +33,6 @@ test_wheel:
     - poetry export --without-hashes --dev -f requirements.txt | pip install -r /dev/stdin
     - eatmydata pip install dist/*.whl
     - sudo -u testuser eatmydata tox
-  artifacts:
-    paths:
-      - dist/
 
 build_docker:
   stage: build_integrated
