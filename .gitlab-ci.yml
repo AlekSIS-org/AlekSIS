@@ -49,7 +49,7 @@ test_docker:
   image:
     name: debian:buster-slim
   services:
-    - name: postgresql:12
+    - name: postgres:12
       alias: db
     - name: memcached:latest
       alias: memcached
