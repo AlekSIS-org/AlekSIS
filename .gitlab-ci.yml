@@ -62,19 +62,26 @@ build_docker:
        --cache=true
        --cleanup
 
-test_docker:
+test_docker_selenium:
   stage: test_integrated
   image:
-    name: debian:buster-slim
+    name: registry.edugit.org/teckids/docker-images/python-pimped:master
   services:
     - name: postgres:12
       alias: db
-    - name: memcached:latest
+    - name: memcached
       alias: memcached
     - name: registry.edugit.org/biscuit/biscuit-ng:${CI_COMMIT_REF_NAME}
       alias: app
+  before_script:
+    - apt-get -y update && eatmydata apt-get -y install chromium-driver
+    - eatmydata pip install selenium pytest-selenium
+    - adduser --disabled-password --gecos "Test User" testuser
   script:
-    - echo true
+    - sudo -u testuser eatmydata tox -e selenium
+  artifacts:
+    paths:
+      - screenshots/
 
 deploy_demo-master:
   stage: deploy
