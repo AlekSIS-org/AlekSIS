@@ -24,7 +24,7 @@ test:
     - eatmydata pip install "poetry==${POETRY_VERSION}"
     - adduser --disabled-password --gecos "Test User" testuser
   script:
-    - sudo -u testuser eatmydata poetry install
+    - sudo -u testuser sh -c 'poetry export -f requirements.txt | eatmydata pip install -r /dev/stdin'
     - sudo -u testuser eatmydata poetry run tox
 
 build_dist:
@@ -120,7 +120,7 @@ pages:
   - eatmydata apt-get -y install make
   - eatmydata pip install "poetry==${POETRY_VERSION}"
   script:
-  - eatmydata poetry install
+  - poetry export -f requirements.txt | eatmydata pip install -r /dev/stdin
   - poetry run make -C docs html BUILDDIR=../public/docs
   artifacts:
     paths:
