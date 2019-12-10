@@ -48,6 +48,9 @@ build_docker:
        --destination $CI_REGISTRY_IMAGE/nginx:$CI_COMMIT_REF_NAME
        --cache=true
        --cleanup
+  only:
+    - master
+    - tags
 
 test_wheel:
   stage: test
@@ -81,6 +84,9 @@ test_docker:
       alias: app
   script:
     - echo true
+  only:
+    - master
+    - tags
 
 deploy_demo-master:
   stage: deploy
