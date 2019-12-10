@@ -1,8 +1,6 @@
 stages:
-  - build_standalone
-  - test_standalone
-  - build_integrated
-  - test_integrated
+  - build
+  - test
   - deploy
 
 variables:
@@ -22,7 +20,7 @@ cache:
     - .cache/pip
 
 build_wheel:
-  stage: build_standalone
+  stage: build
   image:
     name: registry.edugit.org/teckids/docker-images/python-pimped:master
   script:
@@ -31,19 +29,8 @@ build_wheel:
     paths:
       - dist/
 
-test_wheel:
-  stage: test_standalone
-  image:
-    name: registry.edugit.org/teckids/docker-images/python-pimped:master
-  before_script:
-    - adduser --disabled-password --gecos "Test User" testuser
-  script:
-    - poetry export --without-hashes --dev -f requirements.txt | pip install -r /dev/stdin
-    - eatmydata pip install dist/*.whl
-    - sudo -u testuser eatmydata tox
-
 build_docker:
-  stage: build_integrated
+  stage: build
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
@@ -62,8 +49,24 @@ build_docker:
        --cache=true
        --cleanup
 
-test_docker_selenium:
-  stage: test_integrated
+test_wheel:
+  stage: test
+  image:
+    name: registry.edugit.org/teckids/docker-images/python-pimped:master
+  before_script:
+    - apt-get -y update && eatmydata apt-get -y install chromium-driver
+    - adduser --disabled-password --gecos "Test User" testuser
+    - mkdir -p screenshots && chown testuser screenshots
+  script:
+    - poetry export --without-hashes --dev -f requirements.txt | pip install -r /dev/stdin
+    - eatmydata pip install dist/*.whl
+    - sudo -u testuser eatmydata env TEST_SCREENSHOT_PATH=./screenshots tox
+  artifacts:
+    paths:
+      - screenshots/
+
+test_docker:
+  stage: test
   image:
     name: registry.edugit.org/teckids/docker-images/python-pimped:master
   services:
@@ -73,17 +76,8 @@ test_docker_selenium:
       alias: memcached
     - name: registry.edugit.org/biscuit/biscuit-ng:${CI_COMMIT_REF_NAME}
       alias: app
-  before_script:
-    - apt-get -y update && eatmydata apt-get -y install chromium-driver
-    - eatmydata pip install selenium pytest-selenium
-    - poetry export --without-hashes --dev -f requirements.txt | pip install -r /dev/stdin
-    - eatmydata pip install dist/*.whl
-    - adduser --disabled-password --gecos "Test User" testuser
   script:
-    - sudo -u testuser eatmydata tox -e selenium
-  artifacts:
-    paths:
-      - screenshots/
+    - echo true
 
 deploy_demo-master:
   stage: deploy
