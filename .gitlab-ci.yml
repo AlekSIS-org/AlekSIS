@@ -60,6 +60,9 @@ test_wheel:
   script:
     - poetry export --without-hashes --dev -f requirements.txt | pip install -r /dev/stdin
     - eatmydata pip install dist/*.whl
+    - python ./manage.py compilemessages
+    - eatmydata python ./manage.py yarn install
+    - python ./manage.py collectstatic --no-input --clear
     - sudo -u testuser eatmydata env TEST_SCREENSHOT_PATH=./screenshots tox
   artifacts:
     paths:
