@@ -76,6 +76,8 @@ test_docker_selenium:
   before_script:
     - apt-get -y update && eatmydata apt-get -y install chromium-driver
     - eatmydata pip install selenium pytest-selenium
+    - poetry export --without-hashes --dev -f requirements.txt | pip install -r /dev/stdin
+    - eatmydata pip install dist/*.whl
     - adduser --disabled-password --gecos "Test User" testuser
   script:
     - sudo -u testuser eatmydata tox -e selenium
