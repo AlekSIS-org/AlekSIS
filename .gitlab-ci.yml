@@ -6,6 +6,7 @@ stages:
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
+  POETRY_VERSION: 1.0.0b9
   POSTGRESQL_USER: biscuit
   POSTGRESQL_DB: biscuit
   BISCUIT_http__allowed_hosts: "['*']"
@@ -18,7 +19,7 @@ test:
     name: python:3.8-buster
   before_script:
     - apt-get -y update && apt-get -y install postgresql libpq5 libpq-dev libssl-dev sudo
-    - pip install poetry
+    - pip install "poetry==${POETRY_VERSION}"
     - adduser --disabled-password --gecos "Test User" testuser
   script:
     - sudo -u testuser poetry install
@@ -30,7 +31,7 @@ build_dist:
     name: python:3.8-buster
   before_script:
     - apt-get -y update && apt-get -y sudo
-    - pip install poetry
+    - pip install "poetry==${POETRY_VERSION}"
     - adduser --disabled-password --gecos "Test User" testuser
   script:
     - sudo -u testuser poetry build
@@ -111,7 +112,7 @@ pages:
     name: python:3.8-buster
   before_script:
   - apt-get -y update && apt-get -y install make
-  - pip install poetry
+  - pip install "poetry==${POETRY_VERSION}"
   script:
   - poetry install
   - poetry run make -C docs html BUILDDIR=../public/docs
