@@ -115,15 +115,10 @@ pages:
   image:
     name: python:3.8-buster
   before_script:
-<<<<<<< Updated upstream
-  - apt-get -y update && apt-get -y install make
-  - pip install "poetry==${POETRY_VERSION}"
-=======
   - apt-get -y update
   - apt-get -y install eatmydata
   - eatmydata apt-get -y install make
-  - eatmydata pip install poetry
->>>>>>> Stashed changes
+  - eatmydata pip install "poetry==${POETRY_VERSION}"
   script:
   - eatmydata poetry install
   - poetry run make -C docs html BUILDDIR=../public/docs
