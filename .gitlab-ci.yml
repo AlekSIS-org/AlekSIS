@@ -54,7 +54,7 @@ test_wheel:
   image:
     name: registry.edugit.org/teckids/docker-images/python-pimped:master
   before_script:
-    - apt-get -y update && eatmydata apt-get -y install chromium-driver xvfb
+    - apt-get -y update && eatmydata apt-get -y install chromium-driver xvfb gettext
     - adduser --disabled-password --gecos "Test User" testuser
     - mkdir -p screenshots && chown testuser screenshots
   script:
