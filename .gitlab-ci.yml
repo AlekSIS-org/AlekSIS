@@ -56,6 +56,10 @@ test_wheel:
   stage: test
   image:
     name: registry.edugit.org/teckids/docker-images/python-pimped:master
+  services:
+    - selenium/hub
+    - selenium/node-chrome
+    - selenium/node-firefox
   before_script:
     - adduser --disabled-password --gecos "Test User" testuser
     - mkdir -p screenshots && chown testuser screenshots
