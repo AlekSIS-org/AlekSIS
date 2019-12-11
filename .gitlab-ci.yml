@@ -57,7 +57,7 @@ test_wheel:
   image:
     name: registry.edugit.org/teckids/docker-images/python-pimped:master
   before_script:
-    - apt-get -y update && eatmydata apt-get -y install chromium-driver xvfb gettext yarnpkg
+    - apt-get -y update && eatmydata apt-get -y install chromium-driver gettext yarnpkg
     - adduser --disabled-password --gecos "Test User" testuser
     - mkdir -p screenshots && chown testuser screenshots
   script:
@@ -66,7 +66,7 @@ test_wheel:
     - python ./manage.py compilemessages
     - eatmydata python ./manage.py yarn install
     - python ./manage.py collectstatic --no-input --clear
-    - sudo -u testuser eatmydata xvfb-run env TEST_SCREENSHOT_PATH=./screenshots tox
+    - sudo -u testuser eatmydata env TEST_SCREENSHOT_PATH=./screenshots tox
   artifacts:
     paths:
       - screenshots/
