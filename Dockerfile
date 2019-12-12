@@ -12,9 +12,6 @@ ENV BISCUIT_static__root /var/lib/biscuit/static
 ENV BISCUIT_media__root /var/lib/biscuit/media
 ENV BISCUIT_backup__location /var/lib/biscuit/backups
 
-# FIXME Use poetry pre-release for external build
-ENV POETRY_VERSION 1.0.0b3
-
 # Install necessary Debian packages for build and runtime
 RUN apt-get -y update && \
     apt-get -y install eatmydata && \
@@ -31,7 +28,7 @@ RUN apt-get -y update && \
 # Install core dependnecies
 WORKDIR /usr/src/app
 COPY poetry.lock pyproject.toml ./
-RUN eatmydata pip install "poetry==$POETRY_VERSION"; \
+RUN eatmydata pip install poetry; \
     poetry export -f requirements.txt | eatmydata pip install -r /dev/stdin; \
     eatmydata pip install gunicorn
 
