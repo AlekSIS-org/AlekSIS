@@ -70,6 +70,7 @@ test_wheel:
     - eatmydata python ./manage.py yarn install
     - python ./manage.py collectstatic --no-input --clear
     - sudo -u testuser eatmydata env TEST_SCREENSHOT_PATH=./screenshots tox
+    - poetry run pip freeze | safety check --stdin --full-report
   artifacts:
     paths:
       - screenshots/
