@@ -13,14 +13,10 @@ cache:
   - key:
       files:
         - poetry.lock
-    paths:
-      - .cache/pip
-  - key:
-      files:
-        - poetry.lock
         - pyproject.toml
         - tox.ini
     paths:
+      - .cache/pip
       - .tox
 
 test:
