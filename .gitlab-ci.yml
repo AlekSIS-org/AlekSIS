@@ -10,14 +10,14 @@ variables:
   PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
 
 cache:
-  - key:
-      files:
-        - poetry.lock
-        - pyproject.toml
-        - tox.ini
-    paths:
-      - .cache/pip
-      - .tox
+  key:
+    files:
+      - poetry.lock
+      - pyproject.toml
+      - tox.ini
+  paths:
+    - .cache/pip
+    - .tox
 
 test:
   stage: test
