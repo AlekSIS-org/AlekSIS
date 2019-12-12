@@ -1,33 +1,57 @@
+image: registry.edugit.org/teckids/docker-images/python-pimped:master
+
 stages:
-  - build
   - test
+  - build
   - deploy
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
   PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
-  POSTGRESQL_USER: biscuit
-  POSTGRESQL_DB: biscuit
-  BISCUIT_http__allowed_hosts: "['*']"
-  BISCUIT_caching__memcached__address: memcached:11211
-  BISCUIT_database__host: db
 
 cache:
-  key:
-    files:
-      - poetry.lock
-  paths:
-    - .cache/pip
+  - key:
+      files:
+        - poetry.lock
+    paths:
+      - .cache/pip
+  - key:
+      files:
+        - poetry.lock
+        - pyproject.toml
+        - tox.ini
+    paths:
+      - .tox
 
-build_wheel:
+test:
+  stage: test
+  before_script: adduser --disabled-password --gecos "Test User" testuser
+  script: sudo -u testuser tox
+  artifacts:
+    paths:
+      - htmlcov/
+
+lint:
+  stage: test
+  script: tox -e lint,security
+  allow_failure: true
+
+build_dist:
   stage: build
-  image:
-    name: registry.edugit.org/teckids/docker-images/python-pimped:master
   script:
-    - poetry build
+    - tox -e build
   artifacts:
     paths:
       - dist/
+
+pages:
+  stage: deploy
+  script: tox -e docs -- BUILDDIR=../public/docs
+  artifacts:
+    paths:
+    - public/
+  only:
+  - master
 
 build_docker:
   stage: build
@@ -52,53 +76,11 @@ build_docker:
     - master
     - tags
 
-test_wheel:
-  stage: test
-  image:
-    name: registry.edugit.org/teckids/docker-images/python-pimped:master
-  services:
-    - selenium/hub
-    - selenium/node-chrome
-    - selenium/node-firefox
-  before_script:
-    - adduser --disabled-password --gecos "Test User" testuser
-    - mkdir -p screenshots && chown testuser screenshots
-  script:
-    - poetry export --without-hashes --dev -f requirements.txt | pip install -r /dev/stdin
-    - eatmydata pip install dist/*.whl
-    - python ./manage.py compilemessages
-    - eatmydata python ./manage.py yarn install
-    - python ./manage.py collectstatic --no-input --clear
-    - sudo -u testuser eatmydata env TEST_SCREENSHOT_PATH=./screenshots tox
-    - pip freeze | safety check --stdin --full-report
-  artifacts:
-    paths:
-      - screenshots/
-
-test_docker:
-  stage: test
-  image:
-    name: registry.edugit.org/teckids/docker-images/python-pimped:master
-  services:
-    - name: postgres:12
-      alias: db
-    - name: memcached
-      alias: memcached
-    - name: registry.edugit.org/biscuit/biscuit-ng:${CI_COMMIT_REF_NAME}
-      alias: app
-  script:
-    - echo true
-  only:
-    - master
-    - tags
-
 deploy_demo-master:
   stage: deploy
   environment:
     name: demo/master
     url: http://demo-master.biscuit-sis.org  
-  image:
-    name: debian:buster-slim
   before_script:
     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
     - eval $(ssh-agent -s)
@@ -124,16 +106,3 @@ deploy_demo-master:
         up -d
   only:
     - master
-
-pages:
-  stage: deploy
-  image:
-    name: registry.edugit.org/teckids/docker-images/python-pimped:master
-  script:
-  - poetry export --without-hashes --dev -f requirements.txt | eatmydata pip install -r /dev/stdin
-  - make -C docs html BUILDDIR=../public/docs
-  artifacts:
-    paths:
-    - public/
-  only:
-  - master
