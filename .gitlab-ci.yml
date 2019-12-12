@@ -20,15 +20,18 @@ cache:
 
 test:
   stage: test
-  before_script: adduser --disabled-password --gecos "Test User" testuser
-  script: sudo -u testuser tox
+  before_script:
+    - adduser --disabled-password --gecos "Test User" testuser
+  script:
+    - sudo -u testuser tox
   artifacts:
     paths:
       - htmlcov/
 
 lint:
   stage: test
-  script: tox -e lint,security
+  script:
+    - tox -e lint,security
   allow_failure: true
 
 build_dist:
@@ -41,7 +44,8 @@ build_dist:
 
 pages:
   stage: deploy
-  script: tox -e docs -- BUILDDIR=../public/docs
+  script:
+    - tox -e docs -- BUILDDIR=../public/docs
   artifacts:
     paths:
     - public/
