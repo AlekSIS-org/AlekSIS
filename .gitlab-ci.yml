@@ -31,7 +31,7 @@ test:
 lint:
   stage: test
   script:
-    - tox -e black,lint,security
+    - tox -e lint,security
   allow_failure: true
 
 build_dist:
