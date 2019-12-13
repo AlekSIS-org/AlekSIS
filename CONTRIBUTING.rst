@@ -12,21 +12,29 @@ Coding layout and style
 The coding style is defined in `PEP 8`_, with the following differences and
 decisions:
 
+- The defaults of the `black`_ code formatter are used
+  - This implies all string literals usin double-quotes, if it does not lead
+    to more escaping. As proposed by `black`: "My recommendation here is to
+    keep using whatever is faster to type and let Black handle the transformation."
 - The maximum line length is 100 characters
 - Imports are structured in five blocks, each of them sorted as defined in
-  PEP 8:
+  PEP 8 and the Django style guide:
 
   1. Standard library imports
   2. Django imports
   3. Third-party imports
-  4. Imports from other BiscuIT apps (absolute imports)
+  4. Imports from BiscuIT core and other apps (absolute imports)
   5. Imports from the same BiscuIT app (realtive imports)
 
-- All string literals use single quotes
+  Use `isort` to take care of this
 
 For the layout of source trees and style recommendations specific to Django,
 the `Django coding style`_ is a good source of information, together with
 the `Django Best Practices`_ collection.
+
+To ensure code is styled correctly, before commiting, run::
+
+  tox -e reformat
 
 
 Working with the Git repository
