@@ -24,9 +24,6 @@ test:
     - adduser --disabled-password --gecos "Test User" testuser
   script:
     - sudo -u testuser tox -e py38
-  artifacts:
-    paths:
-      - htmlcov/
 
 lint:
   stage: test
