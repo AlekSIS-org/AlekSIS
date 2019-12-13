@@ -23,7 +23,10 @@ test:
   before_script:
     - adduser --disabled-password --gecos "Test User" testuser
   script:
-    - sudo -u testuser tox -e py38
+    - sudo -u testuser tox -e py38 -- --junitxml=.tox/junit.xml
+  artifacts:
+    reports:
+      junit: .tox/junit.xml
 
 lint:
   stage: test
