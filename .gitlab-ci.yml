@@ -8,6 +8,7 @@ stages:
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
   PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  FF_NETWORK_PER_BUILD: "true"
 
 cache:
   key:
@@ -20,11 +21,20 @@ cache:
 
 test:
   stage: test
+  services:
+    - name: selenium/standalone-firefox
+      alias: selenium
   before_script:
     - adduser --disabled-password --gecos "Test User" testuser
   script:
-    - sudo -u testuser tox -e py38 -- --junitxml=.tox/junit.xml
+    - sudo -u testuser 
+      env TEST_SELENIUM_HUB=http://selenium:4444/wd/hub
+          TEST_SELENIUM_BROWSERS=firefox
+          TEST_HOST=build
+      tox -e selenium -- --junitxml=.tox/junit.xml
   artifacts:
+    paths:
+      - .tox/screenshots
     reports:
       junit: .tox/junit.xml
 
