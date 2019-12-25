@@ -128,6 +128,7 @@ licence possible.
 
 .. _PEP 8: https://pep8.org/
 .. _Django coding style: https://docs.djangoproject.com/en/dev/internals/contributing/writing-code/coding-style/
+.. _black: https://black.readthedocs.io/en/stable/
 .. _Django Best Practices: https://django-best-practices.readthedocs.io/en/latest/index.html
 .. _How to Write a Git Commit Message: https://chris.beams.io/posts/git-commit/
 .. _Sane software manifesto: https://sane-software.globalcode.info/
