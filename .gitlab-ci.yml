@@ -56,7 +56,7 @@ build_dist:
 pages:
   stage: deploy
   before_script:
-    - ln -sf .tox/screenshots docs/screenshots
+    - ln -sf .tox/screenshots/firefox docs/screenshots
   script:
     - tox -e docs -- BUILDDIR=../public/docs
   artifacts:
