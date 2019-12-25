@@ -26,6 +26,7 @@ test:
       alias: selenium
   before_script:
     - adduser --disabled-password --gecos "Test User" testuser
+    - chmod -R testuser .
   script:
     - sudo -u testuser 
       env TEST_SELENIUM_HUB=http://selenium:4444/wd/hub
