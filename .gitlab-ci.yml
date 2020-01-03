@@ -28,7 +28,7 @@ test:
     - adduser --disabled-password --gecos "Test User" testuser
     - chown -R testuser .
   script:
-    - sudo -u testuser 
+    - sudo -u testuser
       env TEST_SELENIUM_HUB=http://selenium:4444/wd/hub
           TEST_SELENIUM_BROWSERS=firefox
           TEST_HOST=build
@@ -92,7 +92,7 @@ deploy_demo-master:
   stage: deploy
   environment:
     name: demo/master
-    url: http://demo-master.biscuit-sis.org  
+    url: http://demo-master.biscuit-sis.org
   before_script:
     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
     - eval $(ssh-agent -s)
