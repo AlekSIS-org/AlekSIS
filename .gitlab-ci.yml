@@ -92,7 +92,7 @@ deploy_demo-master:
   stage: deploy
   environment:
     name: demo/master
-    url: http://demo-master.biscuit-sis.org
+    url: http://demo-master.aleksis.org
   before_script:
     - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
     - eval $(ssh-agent -s)
@@ -102,18 +102,18 @@ deploy_demo-master:
     - echo "$SSH_KNOWN_HOSTS" >~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
-    - grep -v "build:" docker-compose.yml | ssh root@demo-master.biscuit-sis.org
-       env BISCUIT_IMAGE_TAG=${CI_COMMIT_REF_NAME}
+    - grep -v "build:" docker-compose.yml | ssh root@demo-master.aleksis.org
+       env ALEKSIS_IMAGE_TAG=${CI_COMMIT_REF_NAME}
        docker-compose
-        -p biscuit-${CI_ENVIRONMENT_SLUG}
+        -p aleksis-${CI_ENVIRONMENT_SLUG}
         -f /dev/stdin
         pull
-    - grep -v "build:" docker-compose.yml | ssh root@demo-master.biscuit-sis.org
-       env BISCUIT_IMAGE_TAG=${CI_COMMIT_REF_NAME}
+    - grep -v "build:" docker-compose.yml | ssh root@demo-master.aleksis.org
+       env ALEKSIS_IMAGE_TAG=${CI_COMMIT_REF_NAME}
            NGINX_HTTP_PORT=80
-           BISCUIT_maintenance__debug=true
+           ALEKSIS_maintenance__debug=true
        docker-compose
-        -p biscuit-${CI_ENVIRONMENT_SLUG}
+        -p aleksis-${CI_ENVIRONMENT_SLUG}
         -f /dev/stdin
         up -d
   only:

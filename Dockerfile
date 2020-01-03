@@ -8,9 +8,9 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK 1
 ENV PIP_NO_CACHE_DIR 1
 
 # Configure app settings for build and runtime
-ENV BISCUIT_static__root /var/lib/biscuit/static
-ENV BISCUIT_media__root /var/lib/biscuit/media
-ENV BISCUIT_backup__location /var/lib/biscuit/backups
+ENV ALEKSIS_static__root /var/lib/aleksis/static
+ENV ALEKSIS_media__root /var/lib/aleksis/media
+ENV ALEKSIS_backup__location /var/lib/aleksis/backups
 
 # Install necessary Debian packages for build and runtime
 RUN apt-get -y update && \
@@ -33,9 +33,9 @@ RUN eatmydata pip install poetry; \
     eatmydata pip install gunicorn
 
 # Install core
-COPY biscuit ./biscuit/
+COPY aleksis ./aleksis/
 COPY LICENCE README.rst manage.py ./
-RUN mkdir -p /var/lib/biscuit/media /var/lib/biscuit/static /var/lib/biscuit/backups; \
+RUN mkdir -p /var/lib/aleksis/media /var/lib/aleksis/static /var/lib/aleksis/backups; \
     poetry build && eatmydata pip install dist/*.whl
 
 # Build messages and assets
@@ -56,7 +56,7 @@ RUN eatmydata apt-get remove --purge -y \
     rm -rf /root/.cache
 
 # Declare a persistent volume for all data
-VOLUME /var/lib/biscuit
+VOLUME /var/lib/aleksis
 
 # Define entrypoint and gunicorn running on port 8000
 EXPOSE 8000

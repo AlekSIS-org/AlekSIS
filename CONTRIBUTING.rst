@@ -1,9 +1,9 @@
 Development principles and contribution guidelines
 ==================================================
 
-In order to create a high-quality software product, the BiscuIT developers
+In order to create a high-quality software product, the AlekSIS developers
 have agreed upon fundamental principles governing the code layout, coding
-style and repository management for BiscuIT and all official apps.
+style and repository management for AlekSIS and all official apps.
 
 
 Coding layout and style
@@ -23,8 +23,8 @@ decisions:
   1. Standard library imports
   2. Django imports
   3. Third-party imports
-  4. Imports from BiscuIT core and other apps (absolute imports)
-  5. Imports from the same BiscuIT app (realtive imports)
+  4. Imports from AlekSIS core and other apps (absolute imports)
+  5. Imports from the same AlekSIS app (realtive imports)
 
   Use `isort` to take care of this
 
@@ -77,7 +77,7 @@ Manifestos governing development
 
 The FOSS community has created some manifestos describing several aspects of
 software development, to agree upon a baseline for these aspects. The
-BiscuIT developers have agreed to adhere to the following manifestos:
+AlekSIS developers have agreed to adhere to the following manifestos:
 
 - The `Sane software manifesto`_
 - The `Accessibility Manifesto`_
@@ -96,7 +96,7 @@ The case on supporting non-free services
 Defined by the `Free Software Definition`_, it is an essential freedom to
 be allowed to use free software for any purpose, without limitation. Thus,
 interoperability with non-free services shall not be ruled out, and the
-BiscuIT project explicitly welcomes implementing support for
+AlekSIS project explicitly welcomes implementing support for
 interoperability with non-free services.
 
 However, to purposefullt foster free software and services, if
