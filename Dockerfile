@@ -34,7 +34,7 @@ RUN eatmydata pip install poetry; \
 
 # Install core
 COPY aleksis ./aleksis/
-COPY LICENCE README.rst manage.py ./
+COPY LICENCE.rst README.rst manage.py ./
 RUN mkdir -p /var/lib/aleksis/media /var/lib/aleksis/static /var/lib/aleksis/backups; \
     poetry build && eatmydata pip install dist/*.whl
 
