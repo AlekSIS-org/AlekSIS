@@ -126,6 +126,25 @@ generalised upstream dependency be created, under the most permissive
 licence possible.
 
 
+How to contact the team
+-----------------------
+
+Development platform
+~~~~~~~~~~~~~~~~~~~~
+
+Main development of AlekSIS is done on the `EduGit`_ platform in the
+`AlekSIS group`_ and discussions are held on the linked `Mattermost team`_.
+
+All platforms and tools mandated for development are free software and
+freely usable. EduGit accepts a variety of sources for login, so
+contributors are free to decide where they want to register in order to
+participate.
+
+If any contributor cannot use the platforms for whatever reasons, patches and
+questions directed at the developers can also be e-mailed to
+<aleksis-dev@lists.teckids.org>.
+
+
 .. _PEP 8: https://pep8.org/
 .. _Django coding style: https://docs.djangoproject.com/en/dev/internals/contributing/writing-code/coding-style/
 .. _black: https://black.readthedocs.io/en/stable/
@@ -136,3 +155,6 @@ licence possible.
 .. _User Data Manifesto: https://userdatamanifesto.org/
 .. _Free Software Definition: https://www.gnu.org/philosophy/free-sw.en.html
 .. _reStructuredText: http://docutils.sourceforge.net/rst.html
+.. _EduGit: https://edugit.org/
+.. _AlekSIS group: https://edugit.org/AlekSIS/
+.. _Mattermost team: https://mattermost.edugit.org/biscuit/
