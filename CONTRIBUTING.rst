@@ -101,7 +101,7 @@ Example::
   - Add the ldap-with-unicorn-dust dependency
   - Configure settings.py to accept the correct groups from LDAP
 
-  CLoses #10.
+  Closes #10.
 
 Merge Requests
 ~~~~~~~~~~~~~~
