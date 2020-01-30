@@ -12,7 +12,7 @@ services:
     image: memcached:latest
   app:
     build: .
-    image: registry.edugit.org/aleksis/aleksis-ng:${ALEKSIS_IMAGE_TAG:-latest}
+    image: registry.edugit.org/aleksis/aleksis:${ALEKSIS_IMAGE_TAG:-latest}
     volumes:
       - aleksis_data:/var/lib/aleksis/
     environment:
@@ -25,7 +25,7 @@ services:
       - memcached
   web:
     build: ./docker/nginx
-    image: registry.edugit.org/aleksis/aleksis-ng/nginx:${ALEKSIS_IMAGE_TAG:-latest}
+    image: registry.edugit.org/aleksis/aleksis/nginx:${ALEKSIS_IMAGE_TAG:-latest}
     volumes:
       - aleksis_data:/var/lib/aleksis/
     ports:
