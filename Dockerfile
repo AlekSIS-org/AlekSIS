@@ -25,25 +25,35 @@ RUN apt-get -y update && \
 	netcat-openbsd \
 	yarnpkg
 
-# Install core dependnecies
+# Install core
 WORKDIR /usr/src/app
-COPY poetry.lock pyproject.toml ./
-RUN eatmydata pip install poetry; \
-    poetry export -f requirements.txt | eatmydata pip install -r /dev/stdin; \
+COPY LICENCE.rst README.rst manage.py poetry.lock pyproject.toml ./
+COPY aleksis ./aleksis/
+RUN set -e; \
+    mkdir -p /var/lib/aleksis/media /var/lib/aleksis/static /var/lib/aleksis/backups; \
+    eatmydata pip install poetry; \
+    poetry config virtualenvs.create false; \
+    eatmydata poetry install; \
     eatmydata pip install gunicorn
 
-# Install core
-COPY aleksis ./aleksis/
-COPY LICENCE.rst README.rst manage.py ./
-RUN mkdir -p /var/lib/aleksis/media /var/lib/aleksis/static /var/lib/aleksis/backups; \
-    poetry build && eatmydata pip install dist/*.whl
+# Install official apps
+COPY apps ./apps/
+RUN set -e; \
+    for d in apps/official/*; do \
+        cd $d; \
+        rm -rf .git; \
+        poetry install; \
+        cd ../../..; \
+    done
 
 # Build messages and assets
-RUN python manage.py compilemessages; \
-    eatmydata python manage.py yarn install
+RUN eatmydata python manage.py compilemessages && \
+    eatmydata python manage.py yarn install && \
+    eatmydata python manage.py collectstatic --no-input --clear
 
 # Clean up build dependencies
-RUN eatmydata apt-get remove --purge -y \
+RUN set -e; \
+    eatmydata apt-get remove --purge -y \
         build-essential \
         gettext \
         libpq-dev \
