@@ -48,8 +48,7 @@ RUN set -e; \
 
 # Build messages and assets
 RUN eatmydata python manage.py compilemessages && \
-    eatmydata python manage.py yarn install && \
-    eatmydata python manage.py collectstatic --no-input --clear
+    eatmydata python manage.py yarn install \
 
 # Clean up build dependencies
 RUN set -e; \
