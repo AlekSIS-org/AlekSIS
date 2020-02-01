@@ -17,7 +17,6 @@ while ! nc -z $ALEKSIS_database__host $ALEKSIS_database__port; do
     sleep 0.1
 done
 
-python manage.py collectstatic --no-input --clear
 python manage.py migrate
 
 if [[ -n "$@" ]]; then

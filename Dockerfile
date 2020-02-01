@@ -8,7 +8,7 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK 1
 ENV PIP_NO_CACHE_DIR 1
 
 # Configure app settings for build and runtime
-ENV ALEKSIS_static__root /var/lib/aleksis/static
+ENV ALEKSIS_static__root /usr/share/aleksis/static
 ENV ALEKSIS_media__root /var/lib/aleksis/media
 ENV ALEKSIS_backup__location /var/lib/aleksis/backups
 
@@ -30,7 +30,7 @@ WORKDIR /usr/src/app
 COPY LICENCE.rst README.rst manage.py poetry.lock pyproject.toml ./
 COPY aleksis ./aleksis/
 RUN set -e; \
-    mkdir -p /var/lib/aleksis/media /var/lib/aleksis/static /var/lib/aleksis/backups; \
+    mkdir -p /var/lib/aleksis/media /usr/share/aleksis/static /var/lib/aleksis/backups; \
     eatmydata pip install poetry; \
     poetry config virtualenvs.create false; \
     eatmydata poetry install; \
@@ -48,7 +48,8 @@ RUN set -e; \
 
 # Build messages and assets
 RUN eatmydata python manage.py compilemessages && \
-    eatmydata python manage.py yarn install \
+    eatmydata python manage.py yarn install && \
+    eatmydata python manage.py collectstatic --no-input --clear
 
 # Clean up build dependencies
 RUN set -e; \
