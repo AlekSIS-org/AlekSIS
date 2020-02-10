@@ -1,4 +1,4 @@
-image: registry.edugit.org/teckids/docker-images/python-pimped:master
+image: registry.edugit.org/teckids/team-sysadmin/docker-images/python-pimped:master
 
 stages:
   - test
