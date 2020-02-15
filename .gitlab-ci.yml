@@ -62,8 +62,6 @@ pages:
   artifacts:
     paths:
     - public/
-  only:
-  - master
 
 build_docker:
   stage: build
