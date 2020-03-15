@@ -34,7 +34,7 @@ RUN set -e; \
     eatmydata pip install poetry; \
     poetry config virtualenvs.create false; \
     eatmydata poetry install; \
-    eatmydata pip install gunicorn
+    eatmydata pip install gunicorn django-compressor
 
 # Install official apps
 COPY apps ./apps/
