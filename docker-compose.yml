@@ -19,6 +19,7 @@ services:
     environment:
       - ALEKSIS_http__allowed_hosts="['*']"
       - ALEKSIS_caching__memcached__address=memcached:11211
+      - ALEKSIS_caching__memcached__enabled=true
       - ALEKSIS_database__host=db
       - ALEKSIS_maintenance__debug=${ALEKSIS_maintenance__debug:-false}
     depends_on:
