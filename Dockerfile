@@ -1,4 +1,4 @@
-FROM python:3.8-buster
+FROM python:3.8-buster AS core
 
 # Configure Python to be nice inside Docker and pip to stfu
 ENV PYTHONUNBUFFERED 1
@@ -36,7 +36,30 @@ RUN set -e; \
     eatmydata poetry install; \
     eatmydata pip install gunicorn django-compressor
 
+# Declare a persistent volume for all data
+VOLUME /var/lib/aleksis
+
+# Define entrypoint and gunicorn running on port 8000
+EXPOSE 8000
+COPY docker/entrypoint.sh /usr/local/bin/
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
+# Install core extras
+FROM core AS core-extras
+ARG EXTRA_LDAP
+WORKDIR /usr/src/app
+
+# LDAP
+RUN   if [ $EXTRA_LDAP = 1 ] ; then \
+        eatmydata apt-get install -y --no-install-recommends \
+        libldap2-dev \
+        libsasl2-dev \
+        ldap-utils; \
+        eatmydata poetry install -E ldap; \
+        fi;
+
 # Install official apps
+FROM core-extras AS apps
 COPY apps ./apps/
 RUN set -e; \
     for d in apps/official/*; do \
@@ -47,11 +70,13 @@ RUN set -e; \
     done
 
 # Build messages and assets
+FROM apps as assets
 RUN eatmydata python manage.py compilemessages && \
     eatmydata python manage.py yarn install && \
     eatmydata python manage.py collectstatic --no-input --clear
 
 # Clean up build dependencies
+FROM assets AS clean
 RUN set -e; \
     eatmydata apt-get remove --purge -y \
         build-essential \
@@ -64,11 +89,3 @@ RUN set -e; \
     eatmydata pip uninstall -y poetry; \
     rm -f /var/lib/apt/lists/*_*; \
     rm -rf /root/.cache
-
-# Declare a persistent volume for all data
-VOLUME /var/lib/aleksis
-
-# Define entrypoint and gunicorn running on port 8000
-EXPOSE 8000
-COPY docker/entrypoint.sh /usr/local/bin/
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
