@@ -39,3 +39,4 @@ services:
 volumes:
   postgres_data:
   aleksis_data:
+  aleksis_static:
