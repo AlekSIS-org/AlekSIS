@@ -47,6 +47,7 @@ ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 # Install core extras
 FROM core AS core-extras
 ARG EXTRA_LDAP
+ARG EXTRA_CELERY
 WORKDIR /usr/src/app
 
 # LDAP
@@ -56,6 +57,11 @@ RUN   if [ $EXTRA_LDAP = 1 ] ; then \
         libsasl2-dev \
         ldap-utils; \
         eatmydata poetry install -E ldap; \
+        fi;
+
+# Celery
+RUN   if [ $EXTRA_CELERY = 1 ] ; then \
+        eatmydata poetry install -E celery; \
         fi;
 
 # Install official apps
