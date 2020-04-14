@@ -25,6 +25,36 @@ services:
     depends_on:
       - db
       - memcached
+  worker:
+    build: .
+    image: registry.edugit.org/aleksis/official/aleksis:${ALEKSIS_IMAGE_TAG:-latest}
+    volumes:
+      - aleksis_data:/var/lib/aleksis/
+      - aleksis_static:/usr/share/aleksis/static/
+    entrypoint:  ["celery", "-A", "aleksis.core", "worker", "-l", "info"]
+    environment:
+      - ALEKSIS_http__allowed_hosts="['*']"
+      - ALEKSIS_caching__memcached__address=memcached:11211
+      - ALEKSIS_caching__memcached__enabled=true
+      - ALEKSIS_database__host=db
+      - ALEKSIS_maintenance__debug=${ALEKSIS_maintenance__debug:-false}
+    depends_on:
+      - app
+  scheduler:
+    build: .
+    image: registry.edugit.org/aleksis/official/aleksis:${ALEKSIS_IMAGE_TAG:-latest}
+    volumes:
+      - aleksis_data:/var/lib/aleksis/
+      - aleksis_static:/usr/share/aleksis/static/
+    entrypoint:  ["celery", "-A", "aleksis.core", "beat", "-l", "info", "--scheduler", "django_celery_beat.schedulers:DatabaseScheduler"]
+    environment:
+      - ALEKSIS_http__allowed_hosts="['*']"
+      - ALEKSIS_caching__memcached__address=memcached:11211
+      - ALEKSIS_caching__memcached__enabled=true
+      - ALEKSIS_database__host=db
+      - ALEKSIS_maintenance__debug=${ALEKSIS_maintenance__debug:-false}
+    depends_on:
+      - worker
   web:
     build: ./docker/nginx
     image: registry.edugit.org/aleksis/official/aleksis/nginx:${ALEKSIS_IMAGE_TAG:-latest}
