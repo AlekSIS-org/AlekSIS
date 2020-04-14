@@ -21,8 +21,12 @@ python manage.py compilescss
 python manage.py collectstatic --no-input --clear
 python manage.py migrate
 
-if [[ -n "$@" ]]; then
-    exec "$@"
+ARG=${$1:-"gunicorn"}
+
+if [ $ARG = "celery_worker" ]; then
+    exec celery -A aleksis.core worker -l info
+elif [ $ARG = "celery_beat" ]; then
+    exec celery -A aleksis.core beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
 else
     exec gunicorn aleksis.core.wsgi --bind ${GUNICORN_BIND}
 fi

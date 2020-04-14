@@ -31,7 +31,7 @@ services:
     volumes:
       - aleksis_data:/var/lib/aleksis/
       - aleksis_static:/usr/share/aleksis/static/
-    entrypoint:  ["celery", "-A", "aleksis.core", "worker", "-l", "info"]
+    entrypoint:  ["/usr/local/bin/entrypoint.sh", "celery_worker"]
     environment:
       - ALEKSIS_http__allowed_hosts="['*']"
       - ALEKSIS_caching__memcached__address=memcached:11211
@@ -46,7 +46,7 @@ services:
     volumes:
       - aleksis_data:/var/lib/aleksis/
       - aleksis_static:/usr/share/aleksis/static/
-    entrypoint:  ["celery", "-A", "aleksis.core", "beat", "-l", "info", "--scheduler", "django_celery_beat.schedulers:DatabaseScheduler"]
+    entrypoint:  ["/usr/local/bin/entrypoint.sh", "celery_beat"]
     environment:
       - ALEKSIS_http__allowed_hosts="['*']"
       - ALEKSIS_caching__memcached__address=memcached:11211
