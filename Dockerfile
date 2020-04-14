@@ -46,8 +46,8 @@ ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
 # Install core extras
 FROM core AS core-extras
-ARG EXTRA_LDAP
-ARG EXTRA_CELERY
+ARG EXTRA_LDAP=1
+ARG EXTRA_CELERY=1
 WORKDIR /usr/src/app
 
 # LDAP
