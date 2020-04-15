@@ -22,6 +22,7 @@ services:
       - ALEKSIS_caching__memcached__enabled=true
       - ALEKSIS_database__host=db
       - ALEKSIS_maintenance__debug=${ALEKSIS_maintenance__debug:-false}
+      - ALEKSIS_backup__location=/var/lib/aleksis/backups
     depends_on:
       - db
       - memcached
@@ -38,6 +39,7 @@ services:
       - ALEKSIS_caching__memcached__enabled=true
       - ALEKSIS_database__host=db
       - ALEKSIS_maintenance__debug=${ALEKSIS_maintenance__debug:-false}
+      - ALEKSIS_backup__location=/var/lib/aleksis/backups
     depends_on:
       - app
   scheduler:
