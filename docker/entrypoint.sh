@@ -20,7 +20,7 @@ done
 python manage.py compilescss
 python manage.py collectstatic --no-input --clear
 python manage.py migrate
-python manage.py createintialrevisions
+python manage.py createinitialrevisions
 
 ARG=${$1:-"gunicorn"}
 
