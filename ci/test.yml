@@ -1,0 +1,26 @@
+test:
+  stage: test
+  services:
+    - name: selenium/standalone-firefox
+      alias: selenium
+  before_script:
+    - adduser --disabled-password --gecos "Test User" testuser
+    - chown -R testuser .
+  script:
+    - sudo apt update
+    - sudo apt install python3-ldap libldap2-dev libssl-dev libsasl2-dev python3.7-dev -y
+    - sudo -u testuser
+      env TEST_SELENIUM_HUB=http://selenium:4444/wd/hub
+          TEST_SELENIUM_BROWSERS=firefox
+          TEST_HOST=build
+      tox -e selenium -- --junitxml=.tox/junit.xml
+  artifacts:
+    paths:
+      - .tox/screenshots
+    reports:
+      junit: .tox/junit.xml
+
+lint:
+  stage: test
+  script:
+    - tox -e lint,security
