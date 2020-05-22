@@ -1,0 +1,7 @@
+build_dist:
+  stage: build
+  script:
+    - tox -e build
+  artifacts:
+    paths:
+      - dist/

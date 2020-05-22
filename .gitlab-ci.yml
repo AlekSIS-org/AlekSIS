@@ -1,9 +1,13 @@
-image: registry.edugit.org/teckids/team-sysadmin/docker-images/python-pimped:master
-
 stages:
   - test
   - build
   - deploy
+
+include:
+    - local: "/ci/test.yml"
+    - local: "/ci/build_dist.yml"
+    - local: "/ci/build_docker.yml"
+    - local: "/ci/deploy.yml"
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
@@ -18,105 +22,3 @@ cache:
   paths:
     - .cache/pip
     - .tox
-
-test:
-  stage: test
-  services:
-    - name: selenium/standalone-firefox
-      alias: selenium
-  before_script:
-    - adduser --disabled-password --gecos "Test User" testuser
-    - chown -R testuser .
-  script:
-    - sudo apt update
-    - sudo apt install python3-ldap libldap2-dev libssl-dev libsasl2-dev python3.7-dev -y
-    - sudo -u testuser
-      env TEST_SELENIUM_HUB=http://selenium:4444/wd/hub
-          TEST_SELENIUM_BROWSERS=firefox
-          TEST_HOST=build
-      tox -e selenium -- --junitxml=.tox/junit.xml
-  artifacts:
-    paths:
-      - .tox/screenshots
-    reports:
-      junit: .tox/junit.xml
-
-lint:
-  stage: test
-  script:
-    - tox -e lint,security
-
-build_dist:
-  stage: build
-  script:
-    - tox -e build
-  artifacts:
-    paths:
-      - dist/
-
-pages:
-  stage: deploy
-  before_script:
-    - cp -r .tox/screenshots/firefox docs/screenshots
-  script:
-    - export LC_ALL=en_GB.utf8
-    - tox -e docs -- BUILDDIR=../public/docs
-  artifacts:
-    paths:
-    - public/
-  only:
-    - master
-
-build_docker:
-  stage: build
-  image:
-    name: gcr.io/kaniko-project/executor:v0.22.0
-    entrypoint: [""]
-  script:
-    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" >/kaniko/.docker/config.json
-    - /kaniko/executor
-       --context $CI_PROJECT_DIR
-       --dockerfile $CI_PROJECT_DIR/Dockerfile
-       --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
-       --cache=true
-       --cleanup
-    - /kaniko/executor
-       --context $CI_PROJECT_DIR/docker/nginx
-       --dockerfile $CI_PROJECT_DIR/docker/nginx/Dockerfile
-       --destination $CI_REGISTRY_IMAGE/nginx:$CI_COMMIT_REF_NAME
-       --cache=true
-       --cleanup
-  only:
-    - master
-    - tags
-
-deploy_demo-master:
-  stage: deploy
-  environment:
-    name: demo/master
-    url: http://demo-master.aleksis.org
-  before_script:
-    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
-    - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - echo "$SSH_KNOWN_HOSTS" >~/.ssh/known_hosts
-    - chmod 644 ~/.ssh/known_hosts
-  script:
-    - grep -v "build:" docker-compose.yml | ssh root@demo-master.aleksis.org
-       env ALEKSIS_IMAGE_TAG=${CI_COMMIT_REF_NAME}
-       docker-compose
-        -p aleksis-${CI_ENVIRONMENT_SLUG}
-        -f /dev/stdin
-        pull
-    - grep -v "build:" docker-compose.yml | ssh root@demo-master.aleksis.org
-       env ALEKSIS_IMAGE_TAG=${CI_COMMIT_REF_NAME}
-           NGINX_HTTP_PORT=80
-           ALEKSIS_maintenance__debug=true
-       docker-compose
-        -p aleksis-${CI_ENVIRONMENT_SLUG}
-        -f /dev/stdin
-        up -d
-  only:
-    - master
