@@ -3,7 +3,7 @@ image: registry.edugit.org/teckids/team-sysadmin/docker-images/python-pimped:mas
 build_docker:
   stage: build
   image:
-    name: gcr.io/kaniko-project/executor:v0.22.0
+    name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
   script:
     - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" >/kaniko/.docker/config.json
