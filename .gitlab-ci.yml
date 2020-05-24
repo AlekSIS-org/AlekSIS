@@ -4,21 +4,8 @@ stages:
   - deploy
 
 include:
+    - local: "/ci/general.yml"
     - local: "/ci/test.yml"
     - local: "/ci/build_dist.yml"
     - local: "/ci/build_docker.yml"
     - local: "/ci/deploy.yml"
-
-variables:
-  GIT_SUBMODULE_STRATEGY: recursive
-  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
-  FF_NETWORK_PER_BUILD: "true"
-
-cache:
-  key:
-    files:
-      - poetry.lock
-      - pyproject.toml
-  paths:
-    - .cache/pip
-    - .tox
