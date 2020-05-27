@@ -48,7 +48,7 @@ Working with the Git repository
 
 The Git repository shall be used as a historic documentation of development
 and as change management. It is important that the Git commit history
-describes waht was changed, by whom and why.
+describes what was changed, by whom and why.
 
 Help and information on Git for beginners are available in the `Git guide`_
 
