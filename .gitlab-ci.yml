@@ -5,4 +5,3 @@ include:
     - local: "/ci/build_docker.yml"
     - local: "/ci/pages.yml"
     - local: "/ci/deploy.yml"
-    - local: "/ci/deploy_packages.yml"
