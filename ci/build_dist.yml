@@ -1,6 +1,7 @@
 build_dist:
   stage: build
   script:
+    - "[ $CI_COMMIT_REF_NAME = master ] && poetry version $(poetry version | cut -d' ' -f2)+$(date +%s).${CI_COMMIT_SHORT_SHA}"
     - tox -e build
   artifacts:
     paths:
