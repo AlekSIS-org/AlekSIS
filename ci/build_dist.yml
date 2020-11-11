@@ -10,7 +10,7 @@ build_dist:
        fi ;
       fi
     - tox -e build
-    - poetry publish -r gitlab -u gitlab-ci-token -p ${CI_JOB_TOKEN} -u gitlab-ci-token
+    - poetry publish -r gitlab
   artifacts:
     paths:
       - dist/
