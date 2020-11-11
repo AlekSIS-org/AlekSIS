@@ -9,6 +9,7 @@ variables:
   GIT_SUBMODULE_STRATEGY: recursive
   PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
   FF_NETWORK_PER_BUILD: "true"
+  POETRY_REPOSITORIES_GITLAB_URL: "${CI_API_V4_URL}/projects/$CI_PROJECT_ID/packages/pypi"
 
 cache:
   key:

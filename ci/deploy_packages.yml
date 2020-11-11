@@ -1,0 +1,4 @@
+deploy_packages:
+  stage: deploy
+  script:
+    - poetry publish -r gitlab -u gitlab-ci-token -p ${CI_JOB_TOKEN} -u gitlab-ci-token
