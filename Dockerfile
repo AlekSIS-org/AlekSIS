@@ -86,6 +86,5 @@ RUN set -e; \
         yarnpkg; \
     eatmydata apt-get autoremove --purge -y; \
     apt-get clean -y; \
-    eatmydata pip uninstall -y poetry; \
     rm -f /var/lib/apt/lists/*_*; \
     rm -rf /root/.cache
