@@ -1,6 +1,3 @@
 include:
     - local: "/ci/general.yml"
-    - local: "/ci/test.yml"
-    - local: "/ci/build_dist.yml"
-    - local: "/ci/pages.yml"
-    - local: "/ci/deploy_pypi.yml"
+    - local: "/ci/build_docker.yml"
