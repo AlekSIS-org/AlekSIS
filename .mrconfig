@@ -1,3 +1,6 @@
+[.]
+checkout = git clone https://edugit.org/AlekSIS/official/AlekSIS.git
+
 [apps/official/AlekSIS-App-LDAP]
 checkout = git clone https://edugit.org/AlekSIS/official/AlekSIS-App-LDAP.git
 
