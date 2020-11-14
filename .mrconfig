@@ -18,3 +18,6 @@ checkout = git clone https://edugit.org/AlekSIS/official/AlekSIS-App-Chronos.git
 
 [apps/official/AlekSIS-App-Alsijil]
 checkout = git clone https://edugit.org/AlekSIS/official/AlekSIS-App-Alsijil.git
+
+[apps/AlekSIS-Core]
+checkout = git clone https://edugit.org/AlekSIS/official/AlekSIS-Core.git
