@@ -17,10 +17,10 @@ while ! nc -z $ALEKSIS_database__host $ALEKSIS_database__port; do
     sleep 0.1
 done
 
-python manage.py compilescss
-python manage.py collectstatic --no-input --clear
-python manage.py migrate
-python manage.py createinitialrevisions
+django-admin compilescss
+django-admin collectstatic --no-input --clear
+django-admin migrate
+django-admin createinitialrevisions
 
 ARG=${$1:-"gunicorn"}
 
