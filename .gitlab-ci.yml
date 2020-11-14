@@ -4,4 +4,3 @@ include:
     - local: "/ci/build_dist.yml"
     - local: "/ci/pages.yml"
     - local: "/ci/deploy_pypi.yml"
-    - local: "/ci/deploy.yml"
