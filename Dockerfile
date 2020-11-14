@@ -6,6 +6,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PIP_DEFAULT_TIMEOUT 100
 ENV PIP_DISABLE_PIP_VERSION_CHECK 1
 ENV PIP_NO_CACHE_DIR 1
+ENV PIP_EXTRA_INDEX_URL https://edugit.org/api/v4/projects/461/packages/pypi/simple
 
 # Configure app settings for build and runtime
 ENV DJANGO_SETTINGS_MODULE=aleksis.core.settings
