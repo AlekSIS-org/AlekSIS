@@ -9,9 +9,8 @@ deploy_pypi:
         exit 1 ;
        fi ;
       fi
-    - if [ $CI_COMMIT_REF_NAME = master ]; then
-       poetry publish -r gitlab ;
-      elif [ x$CI_COMMIT_REF_NAME = x$CI_COMMIT_TAG ]; then
+    - poetry publish -r gitlab
+    - if [ x$CI_COMMIT_REF_NAME = x$CI_COMMIT_TAG ]; then
        poetry publish ;
       fi
   only:
