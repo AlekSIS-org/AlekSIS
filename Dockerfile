@@ -70,10 +70,9 @@ RUN set -e; \
         eatmydata pip install AlekSIS-App-$app; \
     done
 
-# Build messages and assets
+# Build assets
 FROM apps as assets
-RUN eatmydata django-admin compilemessages && \
-    eatmydata django-admin yarn install && \
+RUN eatmydata django-admin yarn install && \
     eatmydata django-admin collectstatic --no-input --clear
 
 # Clean up build dependencies
