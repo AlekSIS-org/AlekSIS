@@ -1,0 +1,20 @@
+[apps/official/AlekSIS-App-LDAP]
+checkout = git clone https://edugit.org/AlekSIS/official/AlekSIS-App-LDAP.git
+
+[apps/official/AlekSIS-App-DashboardFeeds]
+checkout = git clone https://edugit.org/AlekSIS/official/AlekSIS-App-DashboardFeeds.git
+
+[apps/official/AlekSIS-App-Hjelp]
+checkout = git clone https://edugit.org/AlekSIS/official/AlekSIS-App-Hjelp.git
+
+[apps/official/AlekSIS-App-Untis]
+checkout = git clone https://edugit.org/AlekSIS/official/AlekSIS-App-Untis.git
+
+[apps/official/AlekSIS-App-CSVImport]
+checkout = git clone https://edugit.org/AlekSIS/official/AlekSIS-App-CSVImport.git
+
+[apps/official/AlekSIS-App-Chronos]
+checkout = git clone https://edugit.org/AlekSIS/official/AlekSIS-App-Chronos.git
+
+[apps/official/AlekSIS-App-Alsijil]
+checkout = git clone https://edugit.org/AlekSIS/official/AlekSIS-App-Alsijil.git
