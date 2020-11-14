@@ -8,11 +8,12 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK 1
 ENV PIP_NO_CACHE_DIR 1
 
 # Configure app settings for build and runtime
+ENV DJANGO_SETTINGS_MODULE=aleksis.core.settings
 ENV ALEKSIS_static__root /usr/share/aleksis/static
 ENV ALEKSIS_media__root /var/lib/aleksis/media
 ENV ALEKSIS_backup__location /var/lib/aleksis/backups
 
-# Install necessary Debian packages for build and runtime
+# Install necessary Debian and PyPI packages for build and runtime
 RUN apt-get -y update && \
     apt-get -y install eatmydata && \
     eatmydata apt-get -y upgrade && \
@@ -23,18 +24,13 @@ RUN apt-get -y update && \
 	libpq-dev \
 	libssl-dev \
 	netcat-openbsd \
-	yarnpkg
+	yarnpkg && \
+    eatmydata pip install gunicorn django-compressor
 
 # Install core
-WORKDIR /usr/src/app
-COPY LICENCE.rst README.rst manage.py poetry.lock pyproject.toml ./
-COPY aleksis ./aleksis/
 RUN set -e; \
     mkdir -p /var/lib/aleksis/media /usr/share/aleksis/static /var/lib/aleksis/backups; \
-    eatmydata pip install poetry; \
-    poetry config virtualenvs.create false; \
-    eatmydata poetry install; \
-    eatmydata pip install gunicorn django-compressor
+    eatmydata pip install AlekSIS-Core
 
 # Declare a persistent volume for all data
 VOLUME /var/lib/aleksis
@@ -56,30 +52,28 @@ RUN   if [ $EXTRA_LDAP = 1 ] ; then \
         libldap2-dev \
         libsasl2-dev \
         ldap-utils; \
-        eatmydata poetry install -E ldap; \
+        eatmydata pip install AlekSIS-Core\[LDAP\]; \
         fi;
 
 # Celery
 RUN   if [ $EXTRA_CELERY = 1 ] ; then \
-        eatmydata poetry install -E celery; \
+        eatmydata pip install AlekSIS-Core\[celery\]; \
         fi;
 
 # Install official apps
 FROM core-extras AS apps
-COPY apps ./apps/
+ARG APPS="Hjelp LDAP DashboardFeeds"
+
 RUN set -e; \
-    for d in apps/official/*; do \
-        cd $d; \
-        rm -rf .git; \
-        poetry install; \
-        cd ../../..; \
+    for app in $APPS; do \
+        eatmydata pip install AlekSIS-App-$app; \
     done
 
 # Build messages and assets
 FROM apps as assets
-RUN eatmydata python manage.py compilemessages && \
-    eatmydata python manage.py yarn install && \
-    eatmydata python manage.py collectstatic --no-input --clear
+RUN eatmydata django-admin compilemessages && \
+    eatmydata django-admin yarn install && \
+    eatmydata django-admin collectstatic --no-input --clear
 
 # Clean up build dependencies
 FROM assets AS clean
