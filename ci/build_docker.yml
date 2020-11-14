@@ -1,15 +1,22 @@
 build_docker:
   stage: build
   image:
-    name: buildah/buildah
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
   script:
-    - echo "$CI_REGISTRY_PASSWORD" | buildah login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
-    - buildah bud -f Dockerfile -t app .
-    - buildah bud -f docker/nginx/Dockerfile -t nginx docker/nginx
-    - CONTAINER_ID=$(buildah from app; buildah commit --squash $CONTAINER_ID $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
-    - CONTAINER_ID=$(buildah from nginx; buildah commit --squash $CONTAINER_ID $CI_REGISTRY_IMAG/nginxE:$CI_COMMIT_REF_NAME
-    - buildah push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
-    - buildah push $CI_REGISTRY_IMAGE/nginx:$CI_COMMIT_REF_NAME
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" >/kaniko/.docker/config.json
+    - /kaniko/executor
+       --context $CI_PROJECT_DIR
+       --dockerfile $CI_PROJECT_DIR/Dockerfile
+       --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+       --cache=true
+       --cleanup
+    - /kaniko/executor
+       --context $CI_PROJECT_DIR/docker/nginx
+       --dockerfile $CI_PROJECT_DIR/docker/nginx/Dockerfile
+       --destination $CI_REGISTRY_IMAGE/nginx:$CI_COMMIT_REF_NAME
+       --cache=true
+       --cleanup
   only:
     - master
     - tags
