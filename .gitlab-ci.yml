@@ -1,3 +1,4 @@
 include:
     - local: "/ci/general.yml"
     - local: "/ci/build_docker.yml"
+    - local: "/ci/deploy_demo.yml"
