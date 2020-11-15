@@ -8,6 +8,6 @@ build_metapackages:
   script:
     - for dir in meta/*; do;
         cd $dir;
-	poetry build;
-	poetry publish -r gitlab;
+        poetry build;
+        poetry publish -r gitlab;
       done
