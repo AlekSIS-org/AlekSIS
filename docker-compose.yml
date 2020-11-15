@@ -12,7 +12,7 @@ services:
   memcached:
     image: memcached:latest
   app:
-    build: .
+    build: ./docker/app
     image: registry.edugit.org/aleksis/official/aleksis:${ALEKSIS_IMAGE_TAG:-latest}
     volumes:
       - aleksis_data:/var/lib/aleksis/

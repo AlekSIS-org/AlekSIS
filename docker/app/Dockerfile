@@ -38,7 +38,7 @@ VOLUME /var/lib/aleksis
 
 # Define entrypoint and gunicorn running on port 8000
 EXPOSE 8000
-COPY docker/entrypoint.sh /usr/local/bin/
+COPY entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
 # Install core extras
