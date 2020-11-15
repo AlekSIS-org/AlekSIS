@@ -1,6 +1,9 @@
 [.]
 checkout = git clone https://edugit.org/AlekSIS/official/AlekSIS.git
 
+[apps/AlekSIS-Core]
+checkout = git clone https://edugit.org/AlekSIS/official/AlekSIS-Core.git
+
 [apps/official/AlekSIS-App-LDAP]
 checkout = git clone https://edugit.org/AlekSIS/official/AlekSIS-App-LDAP.git
 
@@ -22,5 +25,14 @@ checkout = git clone https://edugit.org/AlekSIS/official/AlekSIS-App-Chronos.git
 [apps/official/AlekSIS-App-Alsijil]
 checkout = git clone https://edugit.org/AlekSIS/official/AlekSIS-App-Alsijil.git
 
-[apps/AlekSIS-Core]
-checkout = git clone https://edugit.org/AlekSIS/official/AlekSIS-Core.git
+[apps/onboarding/AlekSIS-App-POSIX]
+checkout = git clone https://edugit.org/AlekSIS/onboarding/AlekSIS-App-POSIX.git
+
+[apps/onboarding/AlekSIS-App-Postbuero]
+checkout = git clone https://edugit.org/AlekSIS/onboarding/AlekSIS-App-Postbuero.git
+
+[apps/onboarding/AlekSIS-App-Resint]
+checkout = git clone https://edugit.org/AlekSIS/onboarding/AlekSIS-App-Resint.git
+
+[apps/onboarding/AlekSIS-App-Exlibris]
+checkout = git clone https://edugit.org/AlekSIS/onboarding/AlekSIS-App-Exlibris.git
