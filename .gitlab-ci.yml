@@ -1,15 +1,5 @@
 include:
     - local: "/ci/general.yml"
+    - local: "/ci/build_meta.yml"
     - local: "/ci/build_docker.yml"
     - local: "/ci/deploy_demo.yml"
-
-build_metapackages:
-  stage: build
-  script:
-    - for dir in meta/*; do
-        cd $dir;
-        poetry build;
-        poetry publish -r gitlab || true;
-      done
-  only:
-    - master
