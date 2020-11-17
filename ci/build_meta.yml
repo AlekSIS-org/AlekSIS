@@ -5,7 +5,7 @@ build_metapackages:
         cd $dir;
         poetry build;
         poetry publish -r gitlab || true;
-	cd -;
+        cd -;
       done
   only:
     - master
