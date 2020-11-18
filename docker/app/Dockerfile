@@ -28,10 +28,19 @@ RUN apt-get -y update && \
 	yarnpkg && \
     eatmydata pip install gunicorn django-compressor
 
+# Install extra dependencies
+ARG EXTRAS="celery,ldap"
+RUN   if [ ",$EXTRAS," = *",ldap,"* ]; then \
+        eatmydata apt-get install -y --no-install-recommends \
+        libldap2-dev \
+        libsasl2-dev \
+        ldap-utils; \
+      fi;
+
 # Install core
 RUN set -e; \
     mkdir -p /var/lib/aleksis/media /usr/share/aleksis/static /var/lib/aleksis/backups; \
-    eatmydata pip install AlekSIS-Core
+    eatmydata pip install AlekSIS-Core\[$EXTRAS\]
 
 # Declare a persistent volume for all data
 VOLUME /var/lib/aleksis
@@ -41,33 +50,13 @@ EXPOSE 8000
 COPY entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
-# Install core extras
-FROM core AS core-extras
-ARG EXTRA_LDAP=1
-ARG EXTRA_CELERY=1
-WORKDIR /usr/src/app
-
-# LDAP
-RUN   if [ $EXTRA_LDAP = 1 ] ; then \
-        eatmydata apt-get install -y --no-install-recommends \
-        libldap2-dev \
-        libsasl2-dev \
-        ldap-utils; \
-        eatmydata pip install AlekSIS-Core\[LDAP\]; \
-        fi;
-
-# Celery
-RUN   if [ $EXTRA_CELERY = 1 ] ; then \
-        eatmydata pip install AlekSIS-Core\[celery\]; \
-        fi;
-
 # Install official apps
-FROM core-extras AS apps
+FROM core AS apps
 ARG APPS="Hjelp LDAP DashboardFeeds"
 
 RUN set -e; \
     for app in $APPS; do \
-        eatmydata pip install AlekSIS-App-$app; \
+        eatmydata pip install AlekSIS-App-$app\[$EXTRAS\]; \
     done
 
 # Build assets
@@ -83,6 +72,8 @@ RUN set -e; \
         gettext \
         libpq-dev \
         libssl-dev \
+        libldap2-dev \
+        libsasl2-dev \
         yarnpkg; \
     eatmydata apt-get autoremove --purge -y; \
     apt-get clean -y; \
