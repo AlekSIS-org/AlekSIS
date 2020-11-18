@@ -1,4 +1,4 @@
-deploy_pypi:
+deploy_gitlab:
   stage: deploy
   script:
     - if [ $CI_COMMIT_REF_NAME = master ]; then
@@ -10,9 +10,17 @@ deploy_pypi:
        fi ;
       fi
     - poetry publish -r gitlab
-    - if [ x$CI_COMMIT_REF_NAME = x$CI_COMMIT_TAG ]; then
-       poetry publish ;
-      fi
   only:
     - master
+    - tags
+
+deploy_pypi:
+  stage: deploy
+  script:
+    - if ! [ "$(poetry version | cut -d" " -f2)" = $CI_COMMIT_REF_NAME ]; then
+       echo "Package version does not match tag. Aborting build of tag!" >/dev/fd/2 ;
+       exit 1 ;
+      fi
+    - poetry publish
+  only:
     - tags
