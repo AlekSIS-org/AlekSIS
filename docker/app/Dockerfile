@@ -30,12 +30,14 @@ RUN apt-get -y update && \
 
 # Install extra dependencies
 ARG EXTRAS="celery,ldap"
-RUN   if [ ",$EXTRAS," = *",ldap,"* ]; then \
-        eatmydata apt-get install -y --no-install-recommends \
-        libldap2-dev \
-        libsasl2-dev \
-        ldap-utils; \
-      fi;
+RUN   case ",$EXTRAS," in \
+        (*",ldap,"*) \
+          eatmydata apt-get install -y --no-install-recommends \
+            libldap2-dev \
+            libsasl2-dev \
+            ldap-utils \
+	  ;; \
+      esac
 
 # Install core
 RUN set -e; \
