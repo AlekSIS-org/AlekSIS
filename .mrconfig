@@ -1,7 +1,7 @@
 [.]
 checkout = git clone https://edugit.org/AlekSIS/official/AlekSIS.git
 
-[apps/AlekSIS-Core]
+[apps/official/AlekSIS-Core]
 checkout = git clone https://edugit.org/AlekSIS/official/AlekSIS-Core.git
 
 [apps/official/AlekSIS-App-LDAP]
