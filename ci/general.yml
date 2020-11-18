@@ -3,6 +3,7 @@ image: registry.edugit.org/teckids/team-sysadmin/docker-images/python-pimped:lat
 stages:
   - test
   - build
+  - integration
   - deploy
 
 variables:

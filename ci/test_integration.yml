@@ -1,5 +1,5 @@
 check_apps:
-  stage: test
+  stage: integration
   before_script:
     - sudo apt install myrepos
     - pip install toml
