@@ -1,7 +1,7 @@
 check_apps:
   stage: integration
   before_script:
-    - sudo apt install myrepos
+    - sudo apt update -y && apt install -y myrepos
     - pip install toml
     - mr checkout
   script:
