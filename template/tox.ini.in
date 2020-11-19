@@ -49,9 +49,8 @@ exclude = migrations,tests
 ignore = BLK100,E203,E231,W503,D100,D101,D102,D103,D104,D105,D106,D107,RST215,RST214,F821,F841,S106,T100,T101,DJ05
 
 [isort]
+profile = black
 line_length = 100
-multi_line_output = 3
-include_trailing_comma = 1
 default_section = THIRDPARTY
 known_first_party = aleksis
 known_django = django
