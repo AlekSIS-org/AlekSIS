@@ -1,0 +1,9 @@
+check_apps:
+  stage: integration
+  before_script:
+    - sudo apt update -y && apt install -y myrepos
+    - pip install toml
+    - mr checkout
+  script:
+    - ./template/check_apps.py
+  allow_failure: true

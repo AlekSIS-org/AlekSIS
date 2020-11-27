@@ -1,8 +1,9 @@
-image: registry.edugit.org/teckids/team-sysadmin/docker-images/python-pimped:latest
+image: registry.edugit.org/teckids/team-sysadmin/docker-images/python-pimped:master
 
 stages:
   - test
   - build
+  - integration
   - deploy
 
 variables:
@@ -12,7 +13,7 @@ variables:
   POETRY_REPOSITORIES_GITLAB_URL: "$CI_API_V4_URL/projects/461/packages/pypi"
   POETRY_HTTP_BASIC_GITLAB_USERNAME: aleksis
   POETRY_HTTP_BASIC_GITLAB_PASSWORD: "$GITLAB_PUBLISH_TOKEN"
-  POETRY_PYPI_TOKEN_PYPI: "$GITLAB_PUBLISH_TOKEN"
+  POETRY_PYPI_TOKEN_PYPI: "$PYPI_PUBLISH_TOKEN"
 
 cache:
   key:
