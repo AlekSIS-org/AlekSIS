@@ -1,0 +1,11 @@
+build_metapackages:
+  stage: build
+  script:
+    - for dir in meta/*; do
+        cd $dir;
+        poetry build;
+        poetry publish -r gitlab || true;
+        cd -;
+      done
+  only:
+    - master
