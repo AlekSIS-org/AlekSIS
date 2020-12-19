@@ -113,6 +113,21 @@ maintainers take a look at it.
 See below on how to submit patches if you cannot use the development
 platform.
 
+Merge Requests must only be merged by maintainers and must fulfill all of
+the following preconditions before merging:
+
+- All discussions must be resolved
+- The most recent pipeline must have succeeded (including all related pipelines)
+- If the merge request changes the frontend, it must include screenshots
+- If the merge request fixes a bug, it must reference and close an issue with an
+  appropriate issue description
+
+Tagging
+-------
+
+All releases are tagged in the Git repository, using the semantic version string as
+the tag name. Version tags must only be pushed by maintainers.
+
 Manifestos governing development
 --------------------------------
 
