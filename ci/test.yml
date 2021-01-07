@@ -23,4 +23,9 @@ test:
 lint:
   stage: test
   script:
-    - tox -e lint,security
+    - tox -e lint
+
+security:
+  stage: test
+  script:
+    - tox -e security
