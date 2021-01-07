@@ -10,6 +10,8 @@ skip_install = true
 envdir = {toxworkdir}/globalenv
 commands_pre =
      - poetry install
+     - poetry run aleksis-admin yarn install
+     - poetry run aleksis-admin collectstatic --no-input
 commands =
     - poetry run pytest --cov=. {posargs} aleksis/
 
