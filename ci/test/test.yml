@@ -19,13 +19,3 @@ test:
       - .tox/screenshots
     reports:
       junit: .tox/junit.xml
-
-lint:
-  stage: test
-  script:
-    - tox -e lint
-
-security:
-  stage: test
-  script:
-    - tox -e security
