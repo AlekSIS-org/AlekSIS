@@ -1,0 +1,4 @@
+security:
+  stage: test
+  script:
+    - tox -e security
