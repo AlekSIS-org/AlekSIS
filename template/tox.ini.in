@@ -9,11 +9,11 @@ whitelist_externals = poetry
 skip_install = true
 envdir = {toxworkdir}/globalenv
 commands_pre =
-     - poetry install
-     - poetry run aleksis-admin yarn install
-     - poetry run aleksis-admin collectstatic --no-input
+     poetry install
+     poetry run aleksis-admin yarn install
+     poetry run aleksis-admin collectstatic --no-input
 commands =
-    - poetry run pytest --cov=. {posargs} aleksis/
+    poetry run pytest --cov=. {posargs} aleksis/
 
 [testenv:selenium]
 setenv =
