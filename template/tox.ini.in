@@ -35,6 +35,7 @@ commands =
 
 [testenv:build]
 commands_pre =
+    poetry run sh -c "cd aleksis; aleksis-admin compilemessages"
 commands = poetry build
 
 [testenv:docs]
