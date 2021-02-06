@@ -6,6 +6,6 @@
 -->
 
 [ ] I have read the above and have no way to contribute on EduGit
-[ ] I understand that GitHub's terms of service are discriminatory
-    against young contributors, but still cannot contribute on EduGit
-	instead.
+[ ] I understand that GitHub's terms of service exclude young and 
+    learning contributors, but still cannot contribute on EduGit
+    instead.
