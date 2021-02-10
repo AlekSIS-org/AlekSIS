@@ -5,6 +5,7 @@ envlist = py37,py38,py39
 
 [testenv]
 whitelist_externals = poetry
+                      sh
 		      sudo
 skip_install = true
 envdir = {toxworkdir}/globalenv
@@ -36,7 +37,9 @@ commands =
 [testenv:build]
 commands_pre =
     poetry run sh -c "cd aleksis; aleksis-admin compilemessages"
-commands = poetry build
+commands =
+    /bin/sh -c "test -e Makefile && make"
+    poetry build
 
 [testenv:docs]
 commands = poetry run make -C docs/ html {posargs}
