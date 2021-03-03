@@ -27,6 +27,7 @@ commands =
     poetry run black --check --diff aleksis/
     poetry run isort -c --diff --stdout aleksis/
     poetry run flake8 {posargs} aleksis/
+    poetry run curlylint aleksis/
 
 [testenv:security]
 commands =
