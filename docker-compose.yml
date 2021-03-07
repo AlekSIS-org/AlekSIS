@@ -9,8 +9,8 @@ services:
       - POSTGRES_USER=aleksis
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-aleksis}
       - POSTGRES_DB=aleksis
-  memcached:
-    image: memcached:latest
+  redis:
+    image: redis:latest
   app:
     build: ./docker/app
     image: registry.edugit.org/aleksis/official/aleksis:${ALEKSIS_IMAGE_TAG:-latest}
@@ -19,15 +19,14 @@ services:
       - aleksis_static:/usr/share/aleksis/static/
     environment:
       - ALEKSIS_http__allowed_hosts="['*']"
-      - ALEKSIS_caching__memcached__address=memcached:11211
-      - ALEKSIS_caching__memcached__enabled=true
+      - ALEKSIS_redis__host=redis
       - ALEKSIS_database__host=db
       - ALEKSIS_database__password=${POSTGRES_PASSWORD:-aleksis}
       - ALEKSIS_maintenance__debug=${ALEKSIS_maintenance__debug:-false}
       - ALEKSIS_backup__location=/var/lib/aleksis/backups
     depends_on:
       - db
-      - memcached
+      - redis
   worker:
     build: .
     image: registry.edugit.org/aleksis/official/aleksis:${ALEKSIS_IMAGE_TAG:-latest}
@@ -37,8 +36,7 @@ services:
     command: celery_worker
     environment:
       - ALEKSIS_http__allowed_hosts="['*']"
-      - ALEKSIS_caching__memcached__address=memcached:11211
-      - ALEKSIS_caching__memcached__enabled=true
+      - ALEKSIS_redis__host=redis
       - ALEKSIS_database__host=db
       - ALEKSIS_maintenance__debug=${ALEKSIS_maintenance__debug:-false}
       - ALEKSIS_backup__location=/var/lib/aleksis/backups
@@ -53,8 +51,7 @@ services:
     command: celery_beat
     environment:
       - ALEKSIS_http__allowed_hosts="['*']"
-      - ALEKSIS_caching__memcached__address=memcached:11211
-      - ALEKSIS_caching__memcached__enabled=true
+      - ALEKSIS_redis__host=redis
       - ALEKSIS_database__host=db
       - ALEKSIS_maintenance__debug=${ALEKSIS_maintenance__debug:-false}
     depends_on:
