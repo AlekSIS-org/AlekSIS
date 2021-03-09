@@ -9,11 +9,11 @@ docker_image:
        poetry version | cut -d" " -f2 ;
       else
        echo $(poetry version | cut -d" " -f2)+$(date --date=${CI_COMMIT_TIMESTAMP} +%Y%m%d%H%M%S).${CI_COMMIT_SHORT_SHA} ;
-      fi >/tmp/app_version
+      fi >app_version
     - /kaniko/executor
        --context $CI_PROJECT_DIR
        --dockerfile $CI_PROJECT_DIR/Dockerfile
        --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
-       --build-arg=APP_VERSION===$(</tmp/app_version)
+       --build-arg=APP_VERSION===$(<app_version)
        --cache=true
        --cleanup
