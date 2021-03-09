@@ -1,5 +1,5 @@
-build_docker:
-  stage: build
+docker_image:
+  stage: docker
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]

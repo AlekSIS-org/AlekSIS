@@ -3,6 +3,8 @@ image: registry.edugit.org/teckids/team-sysadmin/docker-images/python-pimped:mas
 stages:
   - test
   - build
+  - publish
+  - docker
   - integration
   - deploy
 
