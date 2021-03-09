@@ -6,7 +6,7 @@ deploy_gitlab:
         echo "Package version does not match tag. Aborting build of tag!" >/dev/fd/2 ;
         exit 1 ;
        fi ;
-      else ;
+      else
        poetry version $(poetry version | cut -d" " -f2)+$(date --date=${CI_COMMIT_TIMESTAMP} +%Y%m%d%H%M%S).${CI_COMMIT_SHORT_SHA} ;
       fi
     - poetry publish -r gitlab
