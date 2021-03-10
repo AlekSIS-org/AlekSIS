@@ -1,4 +1,4 @@
-FROM edugit.org/AlekSIS/official/AlekSIS-Core:master AS apps
+FROM registry.edugit.org/AlekSIS/official/AlekSIS-Core:master AS apps
 
 # Install official apps
 FROM core AS apps
