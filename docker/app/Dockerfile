@@ -12,6 +12,7 @@ RUN set -e; \
 
 # Build assets
 FROM apps as assets
+RUN apt update; apt install yarnpkg -y
 RUN eatmydata aleksis-admin yarn install
 
 # Clean up build dependencies
