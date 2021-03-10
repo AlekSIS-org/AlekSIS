@@ -1,7 +1,7 @@
 FROM registry.edugit.org/aleksis/official/aleksis-core:master AS apps
 
 # Install official apps
-FROM core AS apps
+FROM apps AS core
 ARG APPS="Hjelp LDAP DashboardFeeds"
 ARG EXTRAS="ldap"
 
