@@ -1,0 +1,5 @@
+trigger_dist_build:
+  stage: docker
+  trigger: AlekSIS/Official/AlekSIS
+  only:
+    - master
