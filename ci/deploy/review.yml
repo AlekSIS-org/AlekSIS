@@ -3,6 +3,7 @@ review:
   environment:
     name: review/$CI_COMMIT_REF_NAME
     url: https://$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN
+    on_stop: stop_review
   image: lwolf/helm-kubectl-docker
   script:
     - helm pull https://edugit.org/AlekSIS/Deployment/AlekSIS-k8s/-/archive/master/AlekSIS-k8s-master.tar.gz --untar
@@ -14,7 +15,16 @@ review:
        --set ingress.domain=$KUBE_INGRESS_BASE_DOMAIN
        --set podAnnotations.'app\.gitlab\.com'/env=$CI_ENVIRONMENT_SLUG
        --set podAnnotations.'app\.gitlab\.com'/app=$CI_PROJECT_PATH_SLUG
-  only:
-    - branches
-  except:
-    - master
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+
+stop_review:
+  stage: deploy
+  environment:
+    name: review/$CI_COMMIT_REF_NAME
+    action: stop
+  script:
+    - helm uninstall $CI_ENVIRONMENT_SLUG
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+      when: manual
