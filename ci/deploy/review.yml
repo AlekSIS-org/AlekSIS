@@ -17,7 +17,8 @@ review:
        --set podAnnotations.'app\.gitlab\.com'/app=$CI_PROJECT_PATH_SLUG
     - kubectl get secret $CI_ENVIRONMENT_SLUG-aleksis >../passwords.json
   artifacts:
-    - passwords.json
+    paths:
+      - passwords.json
   rules:
     - if: $CI_MERGE_REQUEST_ID
 
