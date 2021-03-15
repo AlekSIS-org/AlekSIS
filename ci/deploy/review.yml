@@ -2,13 +2,13 @@ review:
   stage: deploy
   environment:
     name: review/$CI_COMMIT_REF_NAME
-    url: https://$CI_COMMIT_REF_SLUG.$KUBE_INGRESS_BASE_DOMAIN
+    url: https://$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN
   image: lwolf/helm-kubectl-docker
   script:
     - helm pull https://edugit.org/AlekSIS/Deployment/AlekSIS-k8s/-/archive/master/AlekSIS-k8s-master.tar.gz --untar
     - cd aleksis/
     - helm dep update
-    - helm install $CI_COMMIT_REF_SLUG --set image.repository=$CI_REGISTRY_IMAGE --set image.tag=$CI_COMMIT_REF_SLUG --set ingress.domain=$KUBE_INGRESS_BASE_DOMAIN
+    - helm install $CI_ENVIRONMENT_SLUG --set image.repository=$CI_REGISTRY_IMAGE --set image.tag=$CI_COMMIT_REF_SLUG --set ingress.domain=$KUBE_INGRESS_BASE_DOMAIN
   only:
     - branches
   except:
