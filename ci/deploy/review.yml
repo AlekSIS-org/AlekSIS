@@ -15,6 +15,9 @@ review:
        --set ingress.domain=$KUBE_INGRESS_BASE_DOMAIN
        --set podAnnotations.'app\.gitlab\.com'/env=$CI_ENVIRONMENT_SLUG
        --set podAnnotations.'app\.gitlab\.com'/app=$CI_PROJECT_PATH_SLUG
+    - kubectl get secret $CI_ENVIRONMENT_SLUG-aleksis >../passwords.json
+  artifacts:
+    - passwords.json
   rules:
     - if: $CI_MERGE_REQUEST_ID
 
