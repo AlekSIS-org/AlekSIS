@@ -27,6 +27,8 @@ stop_review:
   environment:
     name: review/$CI_COMMIT_REF_NAME
     action: stop
+  variables:
+    GIT_STRATEGY: none
   image: lwolf/helm-kubectl-docker
   script:
     - helm uninstall $CI_ENVIRONMENT_SLUG
