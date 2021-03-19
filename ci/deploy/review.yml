@@ -35,8 +35,7 @@ review:
   artifacts:
     paths:
       - passwords.json
-  rules:
-    when: manual
+  when: manual
 
 stop_review:
   stage: deploy
@@ -48,5 +47,4 @@ stop_review:
   image: lwolf/helm-kubectl-docker
   script:
     - helm uninstall $CI_ENVIRONMENT_SLUG
-  rules:
-    when: manual
+  when: manual
