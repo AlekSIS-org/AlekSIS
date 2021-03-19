@@ -16,6 +16,7 @@ review:
        redisPassword=$(kubectl get secret aleksis-test-redis -o jsonpath='{.data.redis-password}' | base64 -d);
        secretKey=$(kubectl get secret aleksis-test-aleksis -o jsonpath='{.data.secret-key}' | base64 -d);
        ADDITIONAL_SETS="
+        --set aleksis.config.maintenance.debug=true
         --set aleksis.adminPassword=$adminPassword
         --set aleksis.secretKey=$secretKey
         --set postgresql.postgresqlPassword=$postgresqlPassword
