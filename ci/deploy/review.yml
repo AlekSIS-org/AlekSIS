@@ -10,10 +10,17 @@ review:
     - cd aleksis/
     - helm dep update
     - if helm get all $CI_ENVIRONMENT_SLUG >/dev/null 2>&1; then
+       redisPassword=$(kubectl --namespace default get secret aleksis-test-redis -o jsonpath='{.data.redis-password}' | base64 -d);
+       adminPassword=$(kubectl --namespace default get secret aleksis-test-aleksistest-postgresql='{.data.admin-password}' | base64 -d);
+       postgresqlPassword=$(kubectl --namespace default get secret aleksis-test-postgresql -o jsonpath='{.data.postgresql-password}' | base64 -d);
+       postgresPassword=$(kubectl --namespace default get secret aleksis-test-postgresql -o jsonpath='{.data.postgresql-postgres-password}' | base64 -d);
+       secretKey=$(kubectl --namespace default get secret aleksis-test-aleksis -o jsonpath='{.data.secret-key}' | base64 -d);
        ADDITIONAL_SETS="
-        --set postgresql.existingSecret=$CI_ENVIRONMENT_SLUG-postgres
-        --set redis.existingSecret=$CI_ENVIRONMENT_SLUG-redis
-        --set existingSecret=$CI_ENVIRONMENT_SLUG-aleksis
+        --set postgresql.postgres.postgresPassword=$postgresPassword
+        --set postgresql.postgresqlPassword=$postgresqlPassword
+        --set redis.password=$redisPassword
+        --set aleksis.secretKey=$secretKey
+        --set aleksis.adminPassword=$adminPassword
        "
       fi
     - helm upgrade --install $CI_ENVIRONMENT_SLUG ./
