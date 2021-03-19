@@ -22,7 +22,7 @@ review:
         --set postgresql.postgresqlPassword=$postgresqlPassword
         --set postgresql.postgresqlPostgresPassword=$postgresPassword
         --set redis.password=$redisPassword
-       "
+       ";
       fi
     - helm upgrade --install $CI_ENVIRONMENT_SLUG ./
        --set image.repository=$CI_REGISTRY_IMAGE
