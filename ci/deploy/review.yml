@@ -5,6 +5,8 @@ review:
     url: https://$CI_ENVIRONMENT_SLUG.$KUBE_INGRESS_BASE_DOMAIN
     on_stop: stop_review
   image: lwolf/helm-kubectl-docker
+  before_script:
+    - apk add jq
   script:
     - helm pull https://edugit.org/AlekSIS/Deployment/AlekSIS-k8s/-/archive/master/AlekSIS-k8s-master.tar.gz --untar
     - cd aleksis/
@@ -31,7 +33,7 @@ review:
        --set podAnnotations.'app\.gitlab\.com'/env=$CI_ENVIRONMENT_SLUG
        --set podAnnotations.'app\.gitlab\.com'/app=$CI_PROJECT_PATH_SLUG
        $ADDITIONAL_SETS
-    - kubectl get secret $CI_ENVIRONMENT_SLUG-aleksis >../passwords.json
+    - kubectl get secret $CI_ENVIRONMENT_SLUG-aleksis -o jsonpath='{.data}' | jq 'map_values(@base64d)' >../passwords.json
   artifacts:
     paths:
       - passwords.json
