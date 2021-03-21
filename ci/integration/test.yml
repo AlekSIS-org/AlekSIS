@@ -1,4 +1,5 @@
 check_apps:
+  interruptible: true
   stage: integration
   before_script:
     - sudo apt update -y && apt install -y myrepos

@@ -1,4 +1,5 @@
 test:
+  interruptible: true
   stage: test
   services:
     - name: selenium/standalone-firefox

@@ -1,4 +1,5 @@
 deploy_gitlab:
+  interruptible: true
   stage: publish
   script:
     - if [ x$CI_COMMIT_REF_NAME = x$CI_COMMIT_TAG ]; then
@@ -12,6 +13,7 @@ deploy_gitlab:
     - poetry publish -r gitlab
 
 deploy_pypi:
+  interruptible: true
   stage: publish
   script:
     - if ! [ "$(poetry version | cut -d" " -f2)" = $CI_COMMIT_REF_NAME ]; then

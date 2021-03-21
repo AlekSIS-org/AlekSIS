@@ -1,4 +1,5 @@
 lint:
+  interruptible: true
   stage: test
   script:
     - tox -e lint

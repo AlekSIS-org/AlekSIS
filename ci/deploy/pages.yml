@@ -1,4 +1,5 @@
 pages:
+  interruptible: true
   stage: deploy
   before_script:
     - cp -r .tox/screenshots/firefox docs/screenshots

@@ -1,4 +1,5 @@
 docker_image:
+  interruptible: true
   stage: docker
   image:
     name: gcr.io/kaniko-project/executor:debug
