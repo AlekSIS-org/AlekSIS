@@ -1,4 +1,5 @@
 review:
+  interruptible: true
   stage: deploy
   environment:
     name: review/$CI_COMMIT_REF_NAME

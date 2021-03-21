@@ -1,4 +1,5 @@
 security:
+  interruptible: true
   stage: test
   script:
     - tox -e security

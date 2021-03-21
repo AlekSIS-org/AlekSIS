@@ -1,4 +1,5 @@
 build_metapackages:
+  interruptible: true
   stage: build
   script:
     - for dir in meta/*; do
