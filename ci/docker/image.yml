@@ -11,6 +11,7 @@ docker_image:
        --context $CI_PROJECT_DIR
        --dockerfile $CI_PROJECT_DIR/Dockerfile
        --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+       --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
        --build-arg APP_VERSION===$(cat app_version)
        --cache=true
        --cleanup

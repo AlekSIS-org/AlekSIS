@@ -29,7 +29,7 @@ review:
       fi
     - helm upgrade --install $CI_ENVIRONMENT_SLUG ./
        --set image.repository=$CI_REGISTRY_IMAGE
-       --set image.tag=$CI_COMMIT_REF_SLUG
+       --set image.tag=$CI_COMMIT_SHORT_SHA
        --set ingress.domain=$KUBE_INGRESS_BASE_DOMAIN
        --set podAnnotations.'app\.gitlab\.com'/env=$CI_ENVIRONMENT_SLUG
        --set podAnnotations.'app\.gitlab\.com'/app=$CI_PROJECT_PATH_SLUG
