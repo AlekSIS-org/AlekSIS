@@ -15,15 +15,17 @@ services:
     build: ./docker/app
     image: registry.edugit.org/aleksis/official/aleksis:${ALEKSIS_IMAGE_TAG:-latest}
     volumes:
-      - aleksis_data:/var/lib/aleksis/
-      - aleksis_static:/usr/share/aleksis/static/
+      - aleksis_media: /var/lib/aleksis/media/
+      - aleksis_backups: /var/lib/aleksis/backups/
     environment:
       - ALEKSIS_http__allowed_hosts="['*']"
       - ALEKSIS_redis__host=redis
       - ALEKSIS_database__host=db
       - ALEKSIS_database__password=${POSTGRES_PASSWORD:-aleksis}
       - ALEKSIS_maintenance__debug=${ALEKSIS_maintenance__debug:-false}
-      - ALEKSIS_backup__location=/var/lib/aleksis/backups
+      - PREPARE=1
+    ports:
+      - 8000:80
     depends_on:
       - db
       - redis
@@ -31,40 +33,30 @@ services:
     build: .
     image: registry.edugit.org/aleksis/official/aleksis:${ALEKSIS_IMAGE_TAG:-latest}
     volumes:
-      - aleksis_data:/var/lib/aleksis/
-      - aleksis_static:/usr/share/aleksis/static/
+      - aleksis_media: /var/lib/aleksis/media/
+      - aleksis_backups: /var/lib/aleksis/backups/
     command: celery_worker
     environment:
       - ALEKSIS_redis__host=redis
       - ALEKSIS_database__host=db
       - ALEKSIS_maintenance__debug=${ALEKSIS_maintenance__debug:-false}
+      - PREPARE=0
+      - RUN_MODE=celery-worker
     depends_on:
       - app
   scheduler:
     build: .
     image: registry.edugit.org/aleksis/official/aleksis:${ALEKSIS_IMAGE_TAG:-latest}
-    volumes:
-      - aleksis_data:/var/lib/aleksis/
-      - aleksis_static:/usr/share/aleksis/static/
     command: celery_beat
     environment:
       - ALEKSIS_redis__host=redis
       - ALEKSIS_database__host=db
       - ALEKSIS_maintenance__debug=${ALEKSIS_maintenance__debug:-false}
-    depends_on:
-      - worker
-  web:
-    build: ./docker/nginx
-    image: registry.edugit.org/aleksis/official/aleksis/nginx:${ALEKSIS_IMAGE_TAG:-latest}
-    volumes:
-      - aleksis_data:/var/lib/aleksis/
-      - aleksis_static:/usr/share/aleksis/static/:ro
-    ports:
-      - ${NGINX_HTTP_PORT:-8080}:80
+      - PREPARE=0
+      - RUN_MODE=celery-beat
     depends_on:
       - app
-
 volumes:
   postgres_data:
-  aleksis_data:
-  aleksis_static:
+  aleksis_media:
+  aleksis_backups:
