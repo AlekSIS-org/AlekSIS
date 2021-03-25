@@ -12,7 +12,7 @@ services:
   redis:
     image: redis:latest
   app:
-    build: ./docker/app
+    build: .
     image: registry.edugit.org/aleksis/official/aleksis:${ALEKSIS_IMAGE_TAG:-latest}
     volumes:
       - aleksis_media: /var/lib/aleksis/media/
