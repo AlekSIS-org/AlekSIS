@@ -25,7 +25,7 @@ services:
       - ALEKSIS_maintenance__debug=${ALEKSIS_maintenance__debug:-false}
       - PREPARE=1
     ports:
-      - 8000:80
+      - 80:8000
     depends_on:
       - db
       - redis
@@ -38,6 +38,7 @@ services:
     environment:
       - ALEKSIS_redis__host=redis
       - ALEKSIS_database__host=db
+      - ALEKSIS_database__password=${POSTGRES_PASSWORD:-aleksis}
       - ALEKSIS_maintenance__debug=${ALEKSIS_maintenance__debug:-false}
       - PREPARE=0
       - RUN_MODE=celery-worker
@@ -49,6 +50,7 @@ services:
     environment:
       - ALEKSIS_redis__host=redis
       - ALEKSIS_database__host=db
+      - ALEKSIS_database__password=${POSTGRES_PASSWORD:-aleksis}
       - ALEKSIS_maintenance__debug=${ALEKSIS_maintenance__debug:-false}
       - PREPARE=0
       - RUN_MODE=celery-beat
