@@ -15,8 +15,8 @@ services:
     build: .
     image: registry.edugit.org/aleksis/official/aleksis:${ALEKSIS_IMAGE_TAG:-latest}
     volumes:
-      - aleksis_media: /var/lib/aleksis/media/
-      - aleksis_backups: /var/lib/aleksis/backups/
+      - aleksis_media:/var/lib/aleksis/media/
+      - aleksis_backups:/var/lib/aleksis/backups/
     environment:
       - ALEKSIS_http__allowed_hosts="['*']"
       - ALEKSIS_redis__host=redis
@@ -33,8 +33,8 @@ services:
     build: .
     image: registry.edugit.org/aleksis/official/aleksis:${ALEKSIS_IMAGE_TAG:-latest}
     volumes:
-      - aleksis_media: /var/lib/aleksis/media/
-      - aleksis_backups: /var/lib/aleksis/backups/
+      - aleksis_media:/var/lib/aleksis/media/
+      - aleksis_backups:/var/lib/aleksis/backups/
     command: celery_worker
     environment:
       - ALEKSIS_redis__host=redis
