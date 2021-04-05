@@ -25,9 +25,6 @@ checkout = git clone https://edugit.org/AlekSIS/official/AlekSIS-App-Chronos.git
 [apps/official/AlekSIS-App-Alsijil]
 checkout = git clone https://edugit.org/AlekSIS/official/AlekSIS-App-Alsijil.git
 
-[apps/onboarding/AlekSIS-App-POSIX]
-checkout = git clone https://edugit.org/AlekSIS/onboarding/AlekSIS-App-POSIX.git
-
 [apps/onboarding/AlekSIS-App-Postbuero]
 checkout = git clone https://edugit.org/AlekSIS/onboarding/AlekSIS-App-Postbuero.git
 
