@@ -1,5 +1,6 @@
 security:
   interruptible: true
   stage: test
+  allow_failure: true
   script:
     - tox -e security
