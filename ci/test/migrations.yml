@@ -1,0 +1,7 @@
+migrations:
+  interruptible: true
+  stage: test
+  before_script:
+    - poetry install
+  script:
+    - poetry run aleksis-admin makemigrations --check --dry-run
