@@ -9,7 +9,7 @@ review:
   before_script:
     - apk add jq
   script:
-    - helm pull https://edugit.org/AlekSIS/Deployment/AlekSIS-k8s/-/archive/master/AlekSIS-k8s-master.tar.gz --untar
+    - helm pull https://edugit.org/AlekSIS/Official/AlekSIS-k8s/-/archive/master/AlekSIS-k8s-master.tar.gz --untar
     - cd aleksis/
     - helm dep update
     - if helm get all $CI_ENVIRONMENT_SLUG >/dev/null 2>&1; then
