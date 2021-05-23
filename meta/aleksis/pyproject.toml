@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "AlekSIS"
-version = "2021.06b0"
+version = "2021.6b1"
 packages = [ { include = "aleksis_meta" } ]
 include = ["LICNECE.rst"]
 readme = "README.rst"
@@ -20,7 +20,7 @@ classifiers = [
 
 [tool.poetry.dependencies]
 aleksis-app-alsijil = "2.0b0"
-aleksis-app-chronos = "2.0b0"
+aleksis-app-chronos = "2.0b1"
 aleksis-app-csvimport = "2.0b0"
 aleksis-app-dashboardfeeds = "2.0b0"
 aleksis-app-hjelp = "2.0b0"
