@@ -1,13 +1,6 @@
 AlekSIS — All-libre extensible kit for school information systems
 =================================================================
 
-Warning
--------
-
-**This is an alpha version of AlekSIS, the free school information system.
-The AlekSIS team is looking for schools who want to help shape the 2.0
-final release and supports interested schools in operating AlekSIS.**
-
 What AlekSIS is
 ----------------
 
