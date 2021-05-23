@@ -24,4 +24,3 @@ cache:
       - pyproject.toml
   paths:
     - .cache/pip
-    - .tox
