@@ -15,6 +15,7 @@ test:
           TEST_SELENIUM_BROWSERS=firefox
           TEST_HOST=build
       tox -e selenium -- --junitxml=.tox/junit.xml
+    - chown -R root:root .tox
   artifacts:
     paths:
       - .tox/screenshots
