@@ -2,5 +2,8 @@ security:
   interruptible: true
   stage: test
   allow_failure: true
+  before_script:
+    - id testuser || adduser --disabled-password --gecos "Test User" testuser
+    - chown -R testuser .
   script:
-    - tox -e security
+    - sudo -u testuser tox -e security

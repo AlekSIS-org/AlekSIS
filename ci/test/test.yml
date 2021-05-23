@@ -5,7 +5,7 @@ test:
     - name: selenium/standalone-firefox
       alias: selenium
   before_script:
-    - adduser --disabled-password --gecos "Test User" testuser
+    - id testuser || adduser --disabled-password --gecos "Test User" testuser
     - chown -R testuser .
   script:
     - sudo apt update
@@ -15,7 +15,6 @@ test:
           TEST_SELENIUM_BROWSERS=firefox
           TEST_HOST=build
       tox -e selenium -- --junitxml=.tox/junit.xml
-    - chown -R root:root .tox
   artifacts:
     paths:
       - .tox/screenshots
