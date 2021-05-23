@@ -1,0 +1,30 @@
+deploy_gitlab:
+  interruptible: true
+  stage: publish
+  script:
+    - for dir in meta/*; do
+        cd $dir;
+        if [ x$CI_COMMIT_REF_NAME = x$CI_COMMIT_TAG ]; then
+          if ! [ "$(poetry version | cut -d" " -f2)" = $CI_COMMIT_REF_NAME ]; then
+            echo "Package version does not match tag. Aborting build of tag!" >/dev/fd/2 ;
+            exit 1 ;
+          fi ;
+        else
+          poetry version $(poetry version | cut -d" " -f2)+$(date --date=${CI_COMMIT_TIMESTAMP} +%Y%m%d%H%M%S).${CI_COMMIT_SHORT_SHA} ;
+        fi
+        poetry publish -r gitlab
+
+deploy_pypi:
+  interruptible: true
+  stage: publish
+  script:
+    - for dir in meta/*; do
+        cd $dir;
+        if ! [ "$(poetry version | cut -d" " -f2)" = $CI_COMMIT_REF_NAME ]; then
+          echo "Package version does not match tag. Aborting build of tag!" >/dev/fd/2 ;
+          exit 1 ;
+        fi
+        poetry publish
+      done
+  only:
+    - tags
