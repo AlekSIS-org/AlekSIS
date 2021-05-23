@@ -58,15 +58,17 @@ Licence
 
 ::
 
-  Copyright © 2017, 2018, 2019, 2020 Jonathan Weth <wethjo@katharineum.de>
-  Copyright © 2017, 2018, 2019 Frank Poetzsch-Heffter <p-h@katharineum.de>
-  Copyright © 2018, 2019, 2020 Julian Leucker <leuckeju@katharineum.de>
-  Copyright © 2018, 2019, 2020 Hangzhi Yu <yuha@katharineum.de>
-  Copyright © 2019, 2020 Dominik George <dominik.george@teckids.org>
-  Copyright © 2019, 2020 Tom Teichler <tom.teichler@teckids.org>
+  Copyright © 2017, 2018, 2019, 2020, 2021 Jonathan Weth <wethjo@katharineum.de>
+  Copyright © 2017, 2018, 2019, 2020 Frank Poetzsch-Heffter <p-h@katharineum.de>
+  Copyright © 2018, 2019, 2020, 2021 Julian Leucker <leuckeju@katharineum.de>
+  Copyright © 2018, 2019, 2020, 2021 Hangzhi Yu <yuha@katharineum.de>
+  Copyright © 2019, 2020, 2021 Dominik George <dominik.george@teckids.org>
+  Copyright © 2019, 2020, 2021 Tom Teichler <tom.teichler@teckids.org>
   Copyright © 2019 mirabilos <thorsten.glaser@teckids.org>
-
-  Licenced under the EUPL, version 1.2 or later
+  Copyright © 2021 Lloyd Meins <meinsll@katharineum.de>
+  Copyright © 2021 magicfelix <felix@felix-zauberer.de>
+  
+  Licenced under the EUPL, version 1.2 or later, by Teckids e.V. (Bonn, Germany).
 
 Please see the LICENCE.rst file accompanying this distribution for the
 full licence text or on the `European Union Public Licence`_ website
