@@ -21,11 +21,16 @@ classifiers = [
 [tool.poetry.dependencies]
 aleksis-app-alsijil = "2.0b0"
 aleksis-app-chronos = "2.0b2"
-aleksis-app-csvimport = "2.0b1"
+aleksis-app-csvimport = { version = "2.0b1", optional = true }
 aleksis-app-dashboardfeeds = "2.0b0"
 aleksis-app-hjelp = "2.0b1"
-aleksis-app-ldap = "2.0b0"
-aleksis-app-untis = "2.0b0"
+aleksis-app-ldap = { version = "2.0b0", optional = true } 
+aleksis-app-untis = { version = "2.0b0", optional = true }
+
+[tool.poetry.extras]
+csvimport = ["aleksis-app-csvimport"]
+ldap = ["aleksis-app-ldap"]
+untis = ["aleksis-app-untis"]
 
 [build-system]
 requires = ["poetry>=1.0"]
