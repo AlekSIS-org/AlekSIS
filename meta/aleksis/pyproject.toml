@@ -21,7 +21,7 @@ classifiers = [
 [tool.poetry.dependencies]
 aleksis-app-alsijil = "2.0b0"
 aleksis-app-chronos = "2.0rc1"
-aleksis-app-csvimport = "2.0b1"
+aleksis-app-csvimport = "2.0rc1"
 aleksis-app-dashboardfeeds = "2.0b0"
 aleksis-app-hjelp = "2.0b1"
 aleksis-app-ldap = "2.0b0"
