@@ -25,7 +25,7 @@ aleksis-app-csvimport = "2.0b1"
 aleksis-app-dashboardfeeds = "2.0b0"
 aleksis-app-hjelp = "2.0b1"
 aleksis-app-ldap = "2.0b0"
-aleksis-app-untis = "2.0b0"
+aleksis-app-untis = "2.0rc1"
 
 [build-system]
 requires = ["poetry>=1.0"]
