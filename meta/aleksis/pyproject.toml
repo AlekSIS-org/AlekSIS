@@ -19,6 +19,7 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
+aleksis-core = "2.0rc2"
 aleksis-app-alsijil = "2.0rc1"
 aleksis-app-chronos = "2.0rc1"
 aleksis-app-csvimport = { version = "2.0rc1", optional = true }
