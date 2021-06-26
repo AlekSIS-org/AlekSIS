@@ -24,7 +24,7 @@ aleksis-app-alsijil = "2.0rc2"
 aleksis-app-chronos = "2.0rc1"
 aleksis-app-csvimport = { version = "2.0rc1", optional = true }
 aleksis-app-dashboardfeeds = "2.0rc1"
-aleksis-app-hjelp = "2.0rc1"
+aleksis-app-hjelp = "2.0rc2"
 aleksis-app-ldap = { version = "2.0rc1", optional = true } 
 aleksis-app-untis = { version = "2.0rc1", optional = true }
 
