@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "AlekSIS-Builddeps"
-version = "2021.06b0"
+version = "2021.6rc2"
 packages = []
 
 description = "AlekSIS (School Information System) — Build/Dev dependencies for apps"
